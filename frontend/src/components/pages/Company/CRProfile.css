@@ -1,0 +1,125 @@
+body{
+    margin: 0;
+}
+#crprofile .header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(233, 114, 17);
+    height: 50px;
+}
+#crprofile .body{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    height: 82vh;
+    margin-bottom: 120px;
+}
+#crprofile .img-content{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+.img-logo{
+}
+.content-logo{
+    display: flex;
+    align-self: flex-start;
+    padding-left: 4vh;
+    font-size: 15px;
+    color: #0066B2;
+    text-transform: uppercase;
+}
+.infor{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.img-infor{
+    width: 250px;
+    height: 150px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.name-web{
+    display: flex;
+    padding-right: 70px;
+    padding-left: 90px;
+    flex-direction: column;
+}
+.name-cr{
+    display: flex;
+}
+.cr-content{
+    padding-right: 30px;
+}
+.form-cr{
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+}
+
+.filed-cr{
+    display: flex;
+    flex-direction: column;
+}
+.text-field{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.if{
+    width: 500px;
+    padding: 8px;
+}
+.txtname{
+    padding-left: 50px;
+}
+.input-field{
+    padding-right: 80px;
+}
+.bd-p{
+    border: 1px solid #ccc;
+    width: 85%;
+}
+.lb-des{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.input-intr{
+    width: 91%;
+    padding: 8px;
+    height: 140px;
+}
+.btn-action{
+    display: flex;
+    justify-content: flex-end;
+    margin: 50px;
+}
+.btnCancel{
+    width: 80px;
+    padding: 10px;
+    margin-right: 20px;
+    background-color: #ccc;
+    border: none;
+    height: 50px;
+}
+.btnSave{
+    background-color: #F27229;
+    width: 160px;
+    padding: 10px;
+    margin-left: 20px;
+    height: 50px;
+    color: #fff;
+    border: none;
+}
+#crprofile .footer{
+    display:flex; 
+    align-items: flex-end;
+    height: 50px;
+    background-color: aqua;
+}
