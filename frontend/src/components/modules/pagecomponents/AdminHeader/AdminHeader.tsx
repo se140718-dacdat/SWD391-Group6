@@ -24,7 +24,7 @@ const AdminHeader: React.FC<Props> = props => {
             </div>
             <div id="header">
                 <div className="title">
-                    <img className="title-img" src="images/logo-fpt-certificate.png" alt="logo FPT" />
+                    <img className="title-img" src="/images/logo-fpt-certificate.png" alt="logo FPT" />
                     <h3 className="title-content">phân hiệu trường đại học fpt tại thành phố hồ chí minh</h3>
                 </div>
             </div>

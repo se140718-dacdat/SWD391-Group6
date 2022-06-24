@@ -15,3 +15,47 @@ export interface User {
     roleID: number;
     password: string;
 }
+export interface Student extends User {
+    studentID: string;
+    dateOfBirth: string;
+    gender: string;
+    address: string;
+    phone: string;
+    major: string;
+    fieldName: string;
+    cV_URL: string;
+    ojtStatus: boolean;
+    username: string;
+}
+export interface Field {
+    fieldID: number;
+    fieldName: string;
+}
+export interface Company {
+    companyID: number;
+    companyName: string;
+    address: string;
+    phone: string;
+    email: string
+    webSite: string;
+    careerField: Field[];
+    fieldName: number;
+    introduction: string;
+    description: string;
+    imageURL: string
+    activeStatus: boolean;
+    applyPosition: string;
+}
+export interface Report {
+    termNumber: number;
+    termName: string;
+    studentID: string;
+    fullName: string;
+    companyID: number;
+    companyName: string;
+    cR_ID: number;
+    evaluate: string;
+    attendance: number;
+    attitude: number;
+    grade: number;
+}

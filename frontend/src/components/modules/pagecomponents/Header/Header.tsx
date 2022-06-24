@@ -8,6 +8,7 @@ interface Props {
 const Header: React.FC<Props> = props => {
     const [loginShow, setLoginShow] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
+    const [userInput, setUserInput] = useState({ username: '', password: '' });
 
     const showLogin = () => {
         setLoginShow('display');
@@ -15,12 +16,19 @@ const Header: React.FC<Props> = props => {
     const hidePopup = () => {
         setLoginShow('');
     }
+
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserInput({ ...userInput, [e.target.name]: e.target.value })
+    }
+
     const signInSubmit = (e: FormEvent) => {
         e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const formData = new FormData(form);
-        console.log(form);
-        props.setUser(userList[2]);
+        userList.forEach(user => {
+            if (user.username === userInput.username && user.password === userInput.password) {
+                console.log(user.fullName);
+                props.setUser(user);
+            }
+        });
     }
 
 
@@ -51,14 +59,14 @@ const Header: React.FC<Props> = props => {
                                 <i className="fas fa-times"></i>
                             </span>
                             <div className="modal-title">
-                                <img className="modal-logo" src="images/logo-fpt-certificate.png" alt="" />
+                                <img className="modal-logo" src="images/logo-fpt-certificate.png" alt="logo FPT" />
                                 <h2 className="modal-name">Login</h2>
                                 <p className="modal-description">Sign in to your account</p>
                             </div>
                         </div>
                         <div className="modal-container">
-                            <i className="fa-solid fa-user input-user-icon"></i><input type="text" className="modal-input" required name='username' placeholder="Username" />
-                            <i className="fas fa-lock input-pwd-icon"></i><input type="password" className="modal-input" required name='password' placeholder="Password" />
+                            <i className="fa-solid fa-user input-user-icon"></i><input type="text" className="modal-input" required name='username' placeholder="Username" onChange={onChangeHandler} />
+                            <i className="fas fa-lock input-pwd-icon"></i><input type="password" className="modal-input" required name='password' placeholder="Password" onChange={onChangeHandler} />
                             <button className="btn btn-login">Login</button>
                             {
                                 loginMessage != '' ?
