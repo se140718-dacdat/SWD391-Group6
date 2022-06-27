@@ -28,7 +28,7 @@ export interface Student extends User {
     username: string;
 }
 export interface Field {
-    fieldID: number;
+    fieldID: string;
     fieldName: string;
 }
 export interface Company {
@@ -47,15 +47,9 @@ export interface Company {
     applyPosition: string;
 }
 export interface Report {
-    termNumber: number;
-    termName: string;
     studentID: string;
     fullName: string;
     companyID: number;
     companyName: string;
     cR_ID: number;
-    evaluate: string;
-    attendance: number;
-    attitude: number;
-    grade: number;
 }

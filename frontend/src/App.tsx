@@ -11,6 +11,7 @@ import CRHeader from './components/modules/pagecomponents/CRHeader/CRHeader';
 import { StudentRoute } from './route';
 import StudentViewCompany from './components/pages/StudentViewCompany/StudentViewCompany';
 import StudentProfile from './components/pages/StudentProfile/StudentProfile';
+import _ from 'lodash';
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {

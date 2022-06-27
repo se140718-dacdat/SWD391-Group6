@@ -1,8 +1,9 @@
 import React, { FormEvent, SetStateAction, useState, Dispatch, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Company, Field, Report, ResponseData, User } from '../../../model';
-import { companyList } from '../../../data';
+import { companyList, fieldList } from '../../../data';
 import './StudentViewCompany.css';
+import _ from 'lodash';
 const StudentViewCompany: React.FC = () => {
     const [majors, setMajors] = useState<Field[]>([]);
     const [companies, setCompanies] = useState<Company[]>([]);
@@ -16,6 +17,7 @@ const StudentViewCompany: React.FC = () => {
 
     useEffect(() => {
         setCompanies(companyList);
+        setMajors(fieldList);
         console.log(companies);
     });
     const hideRecuitment = () => {
@@ -32,22 +34,12 @@ const StudentViewCompany: React.FC = () => {
         const formField = formData.get('field') != null ? formData.get('field') : 0;
         const formName = formData.get('search') != null ? formData.get('search') : '';
     }
-    const showRecuitment = (comany: Company) => {
-        fetch('/api/student/company/' + comany.companyID).then(res => {
-            console.log(res);
-            if (res.ok) {
-                (res.json() as Promise<ResponseData & { company: Company, report: Report }>).then(data => {
-                    if (data.error == 0) {
-                        setShowRecuit('display');
-                        setCompany(data.company);
-                        setReport(data.report);
-                    }
-                });
-            }
-        });
+    const showRecuitment = (company: Company) => {
+        setShowRecuit('display');
+        setCompany(company);
+        setReport(report);
     }
 
-    // setCompanies(companyList);
     return (
         <div id='StudentViewCompany'>
             <div id="content">
@@ -76,7 +68,7 @@ const StudentViewCompany: React.FC = () => {
 
                     {
                         companies.map(item =>
-                            <div className="company-item">
+                            <div className="company-item" onClick={() => { showRecuitment(item); }}>
                                 <div className="company-logo">
                                     <img src={item.imageURL} alt="logo-company" />
                                 </div>
