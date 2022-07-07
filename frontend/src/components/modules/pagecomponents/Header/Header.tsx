@@ -2,34 +2,34 @@ import './Header.css';
 import React, { useState, FormEvent, Dispatch, SetStateAction } from 'react';
 import { ResponseData, User } from '../../../../model';
 import { userList } from '../../../../data';
+import { loginUser } from '../../../../redux/apiRequest';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 interface Props {
     setUser: Dispatch<SetStateAction<User | null>>;
 }
 const Header: React.FC<Props> = props => {
     const [loginShow, setLoginShow] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
-    const [userInput, setUserInput] = useState({ username: '', password: '' });
-
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const showLogin = () => {
         setLoginShow('display');
-    }
+    };
     const hidePopup = () => {
         setLoginShow('');
-    }
-
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserInput({ ...userInput, [e.target.name]: e.target.value })
-    }
+    };
 
     const signInSubmit = (e: FormEvent) => {
         e.preventDefault();
-        userList.forEach(user => {
-            if (user.username === userInput.username && user.password === userInput.password) {
-                console.log(user.fullName);
-                props.setUser(user);
-            }
-        });
-    }
+        const newUser = {
+            username: username,
+            password: password,
+        };
+        loginUser(newUser, dispatch, navigate);
+    };
 
 
 
@@ -65,8 +65,8 @@ const Header: React.FC<Props> = props => {
                             </div>
                         </div>
                         <div className="modal-container">
-                            <i className="fa-solid fa-user input-user-icon"></i><input type="text" className="modal-input" required name='username' placeholder="Username" onChange={onChangeHandler} />
-                            <i className="fas fa-lock input-pwd-icon"></i><input type="password" className="modal-input" required name='password' placeholder="Password" onChange={onChangeHandler} />
+                            <i className="fa-solid fa-user input-user-icon"></i><input type="text" className="modal-input" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+                            <i className="fas fa-lock input-pwd-icon"></i><input type="password" className="modal-input" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                             <button className="btn btn-login">Login</button>
                             {
                                 loginMessage != '' ?

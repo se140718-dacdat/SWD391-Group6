@@ -9,9 +9,10 @@ const StudentProfile = () => {
     const [student, setStudent] = useState<Student>();
     const [report, setReport] = useState<Report>();
     const [message, setMessage] = useState('');
+    const [user, setUser] = useState<User>();
     useEffect(() => {
-        setStudent(studentList[0]);
-        setReport(reportList[0]);
+        setUser(user);
+        console.log(user);
     }, [])
     const updateProfileSubmit = (e: FormEvent) => {
         e.preventDefault();

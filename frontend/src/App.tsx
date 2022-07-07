@@ -11,31 +11,31 @@ import CRHeader from './components/modules/pagecomponents/CRHeader/CRHeader';
 import { StudentRoute } from './route';
 import StudentViewCompany from './components/pages/StudentViewCompany/StudentViewCompany';
 import StudentProfile from './components/pages/StudentProfile/StudentProfile';
+import AdminViewStudent from './components/pages/Admin/AdminViewStudent/AdminViewStudent';
 import _ from 'lodash';
+import { useSelector } from 'react-redux';
 const App: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
-  useEffect(() => {
-    setUser(user);
-  }, []);
+  const user = useSelector((state: any) => state.auth.login.currentUser);
+
   return (
     <BrowserRouter>
       {(() => {
         console.log(user);
         switch (user?.roleID) {
           case Roles.Student:
-            return <StudentHeader setUser={setUser} />;
+            return <StudentHeader setUser={user} />;
           case Roles.Admin:
-            return <AdminHeader setUser={setUser} />;
+            return <AdminHeader setUser={user} />;
           case Roles.CR:
-            return <CRHeader setUser={setUser} />;
+            return <CRHeader setUser={user} />;
           default:
-            return <Header setUser={setUser} />
+            return <Header setUser={user} />
         }
       })()}
       <Routes>
         <Route path='/student/companies' element={<StudentViewCompany />}></Route>
         <Route path='/student/profile' element={<StudentProfile />}></Route>
-
+        <Route path='/cre/manage/students/1' element={<AdminViewStudent />}></Route>
         <Route path='/' element={<Index></Index>}></Route>;
       </Routes>
       <Footer></Footer>
