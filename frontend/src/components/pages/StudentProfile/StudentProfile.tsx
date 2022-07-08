@@ -3,17 +3,30 @@ import './StudentProfile.css';
 import MessageBox from '../../modules/popups/MessageBox/MessageBox';
 import { Report, ResponseData, Student, User } from '../../../model';
 import { studentList, reportList } from '../../../data';
+import { useDispatch, useSelector } from 'react-redux';
+import { navigate } from '@reach/router';
+import { getStudent } from '../../../redux/apiRequest';
+import { useNavigate } from 'react-router-dom';
 
 
 const StudentProfile = () => {
-    const [student, setStudent] = useState<Student>();
+    const user = useSelector((state: any) => state.auth.login?.currentUser);
+    const currentStudent = useSelector((state: any) => state.student.student?.student);
+    const [student, setStudent] = useState<Student | null>();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [report, setReport] = useState<Report>();
     const [message, setMessage] = useState('');
-    const [user, setUser] = useState<User>();
+
     useEffect(() => {
-        setUser(user);
-        console.log(user);
-    }, [])
+        if (user.roleID != 2) {
+            navigate("/");
+        }
+        getStudent(dispatch, user.username);
+        setStudent(currentStudent)
+        console.log(currentStudent);
+    }, []);
+
     const updateProfileSubmit = (e: FormEvent) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);

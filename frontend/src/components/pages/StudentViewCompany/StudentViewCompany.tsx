@@ -10,16 +10,22 @@ const StudentViewCompany: React.FC = () => {
     const [company, setCompany] = useState<Company | null>(null);
     const [report, setReport] = useState<Report | null>();
     const [pages, setPages] = useState<number[]>([]);
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(5);
     const [showRecuit, setShowRecuit] = useState('');
-    const [filed, setFiled] = useState(0);
-    const [search, setSearch] = useState('');
 
     useEffect(() => {
         setCompanies(companyList);
         setMajors(fieldList);
-        console.log(companies);
-    });
+        companies.map((company, index) => {
+            pages.push(index++);
+        })
+        console.log(pages);
+    }, []);
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = companies.slice(indexOfFirstPost, indexOfLastPost);
     const hideRecuitment = () => {
         setShowRecuit('');
     }
@@ -31,8 +37,6 @@ const StudentViewCompany: React.FC = () => {
     const searchSubmit = (e: FormEvent) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
-        const formField = formData.get('field') != null ? formData.get('field') : 0;
-        const formName = formData.get('search') != null ? formData.get('search') : '';
     }
     const showRecuitment = (company: Company) => {
         setShowRecuit('display');
@@ -67,7 +71,7 @@ const StudentViewCompany: React.FC = () => {
                 <div className="company-list">
 
                     {
-                        companies.map(item =>
+                        currentPosts.map(item =>
                             <div className="company-item" onClick={() => { showRecuitment(item); }}>
                                 <div className="company-logo">
                                     <img src={item.imageURL} alt="logo-company" />
@@ -101,7 +105,7 @@ const StudentViewCompany: React.FC = () => {
                     <button className="paging-btn pre-btn"><i className="fas fa-angle-double-left"></i></button>
                     {
                         pages.map(item =>
-                            <NavLink className='page-number' to={'/student/companies?page=' + item + '&field=' + filed + '&name=' + search}>{item}</NavLink>
+                            <NavLink className='page-number' to={'/student/companies?page=' + item}>{currentPage}</NavLink>
                         )
                     }
                     <button className="paging-btn next-btn"><i className="fas fa-angle-double-right"></i></button>

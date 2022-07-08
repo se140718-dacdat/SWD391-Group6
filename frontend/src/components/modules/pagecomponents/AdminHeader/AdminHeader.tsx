@@ -1,24 +1,28 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { User } from '../../../../model';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './AdminHeader.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../../../redux/apiRequest';
 interface Props {
     setUser: Dispatch<SetStateAction<User | null>>;
 }
 const AdminHeader: React.FC<Props> = props => {
+    const user = useSelector((state: any) => state.auth.login.currentUser);
+    const accessToken = user?.accessToken;
+    const username = user?.username;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const logout = () => {
-        window.location.href = '/';
+        logoutUser(dispatch, username, navigate, accessToken);
     }
     return (
         <div id='CREHeader'>
             <div id="navbar">
                 <div className="nav-list">
                     <NavLink to={'/cre/companies/1'} className="nav-item"><span>companies</span></NavLink>
-                    <NavLink to={'/cre/companies/register/1'} className="nav-item"><span>Register company</span></NavLink>
-                    <NavLink to={'/cre/requests/1'} className="nav-item"><span>request</span></NavLink>
                     <NavLink to={'/cre/students/0/1'} className="nav-item"><span>OJT report</span></NavLink>
                     <NavLink to={'/cre/manage/students/1'} className="nav-item"><span>Students</span></NavLink>
-                    <NavLink to={'/cre/ojt/1'} className="nav-item"><span>create ojt</span></NavLink>
                     <a onClick={logout} className="nav-item session"><span>logout</span></a>
                 </div>
             </div>

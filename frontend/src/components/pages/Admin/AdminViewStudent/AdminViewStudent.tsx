@@ -1,10 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import './AdminViewStudent.css';
-import { SetStateAction, useEffect, useState } from "react";
+import { FormEvent, SetStateAction, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Company, Field, Student, User } from "../../../../model";
 import { getAllUsers } from "../../../../redux/apiRequest";
-
+interface Props {
+    setPage: Number;
+}
 const AdminViewStudent = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
     const students = useSelector((state: any) => state.user.users?.allUsers);
@@ -18,13 +20,14 @@ const AdminViewStudent = () => {
     const [company, setCompany] = useState<Company>();
     const [showModal, setShowModal] = useState('');
     const [field, setField] = useState<number>(0);
+    const [username, setUsername] = useState('');
 
 
     const deleteCompany = (companyID: string) => { }
 
 
     useEffect(() => {
-        if (!user) {
+        if (user.roleID != 1) {
             navigate("/");
         }
         if (user?.accessToken) {
@@ -33,8 +36,9 @@ const AdminViewStudent = () => {
         { console.log(students) }
         setStudentList(students);
     }, []);
-    const searchSubmit = () => {
-
+    const searchSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        setStudentList(students.filter((student: Student) => student.username == username.toLowerCase()));
     };
 
     return (
@@ -43,8 +47,8 @@ const AdminViewStudent = () => {
                 <div className="vertical-algin">
                     <h3 className="content-heading">Student list</h3>
                     <div className="cr-search">
-                        <form onSubmit={searchSubmit}>
-                            Search <input className="cr-search-bar" type="text" name="search" placeholder="Company name" required /><i className="fas fa-search vertical-algin"></i>
+                        <form onSubmit={searchSubmit} className="cr-search-form">
+                            Search <input className="cr-search-bar" type="text" name="search" placeholder="Student ID" required onChange={(e) => setUsername(e.target.value)} /><i className="fas fa-search vertical-algin"></i>
                         </form>
                     </div>
                 </div>
@@ -60,9 +64,8 @@ const AdminViewStudent = () => {
                     </select>
                 </div>
                 <div className="content-title">
-                    <p className="col2">roll number</p>
+                    <p className="col2">student id</p>
                     <p className="col3">student name</p>
-                    <p>company applied</p>
                     <p></p>
                 </div>
                 <div id="company-list">

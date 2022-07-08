@@ -13,7 +13,6 @@ export interface User {
     email: string;
     roleName: string;
     roleID: number;
-    password: string;
 }
 export interface Student extends User {
     studentID: string;

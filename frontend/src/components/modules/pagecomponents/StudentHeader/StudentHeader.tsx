@@ -2,14 +2,19 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { User } from '../../../../model';
 import { useNavigate, NavLink } from 'react-router-dom';
 import './StudentHeader.css';
+import { logoutUser } from '../../../../redux/apiRequest';
+import { useDispatch, useSelector } from 'react-redux';
 interface Props {
     setUser: Dispatch<SetStateAction<User | null>>;
 }
 const StudentHeader: React.FC<Props> = props => {
+    const user = useSelector((state: any) => state.auth.login.currentUser);
+    const accessToken = user?.accessToken;
+    const username = user?.username;
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const logout = () => {
-        window.location.href = '/';
-
+        logoutUser(dispatch, username, navigate, accessToken);
     }
     return (
         <div id='StudentHeader'>

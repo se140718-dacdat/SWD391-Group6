@@ -28,9 +28,13 @@
     font-weight: bold;
 }
 
+#CREViewCompany .cr-search-form {
+    width: 400px;
+}
+
 #CREViewCompany .cr-search-bar {
     right: inherit;
-    width: 400px;
+    width: 70%;
     padding: 6px 0;
     background-color: #DBF1FF;
     outline: none;
