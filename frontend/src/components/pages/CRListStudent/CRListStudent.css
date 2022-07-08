@@ -1,0 +1,140 @@
+.img-content{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.crlist{
+    background-color: #F7F7F7;
+}
+.search-bar {
+    display: flex;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.search-input {
+    width: 87%;
+    padding-left: 55px;
+    border: none;
+    background-color: #fff;
+}
+
+.search--bar--icon {
+    
+}
+
+.clear-icon {
+    
+}
+
+.clear-icon:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.search-icon {
+    
+}
+
+.btn-search {
+    width: 13%;
+    border: none;
+    background-color: #F27229;
+    color: #fff;
+}
+.title-edit{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #6199F6;
+}
+.table-list{
+    width: 60%;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+.table-header{
+    display: table-header-group;
+    background-color: #F27229AB;
+    font-weight: bold;
+    font-size: 22px;
+}
+.table-header-cell{
+    display: table-cell;
+    padding: 10px;
+    text-align: justify;
+    border: 1px solid #fff;
+    text-align: center;
+    color: #fff;
+}
+.table-body{
+    display: table-row-group;
+}
+.table-row{
+    display: table-row;
+}
+.table-body-cell{
+    background-color: #F27229AB;
+    display: table-cell;
+    border: 1px solid #fff;
+    text-align: center;
+}
+.table-row-twocol{
+    display: flex;
+    flex-direction: column;
+    line-height: 40px;
+}
+.link-details{
+    text-decoration: none;
+    font-weight: bold;
+}
+.footer{
+    width: 70%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+.import{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.import-body{
+    display: flex;
+}
+.ib-txt{
+    margin: 0;
+}
+.input-file{
+    margin-left: 10px;
+}
+.paging{
+    display: flex;
+    width: 20%;
+    justify-content: center;
+    align-items: center
+
+}
+.paging-right,.paging-left{
+    width: 40%;
+    text-align: center;
+}
+.paging-center{
+    width: 10%;
+    text-align: center;
+}
+.export{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.export-link{
+    text-decoration: none;
+    font-size: 21px;
+}

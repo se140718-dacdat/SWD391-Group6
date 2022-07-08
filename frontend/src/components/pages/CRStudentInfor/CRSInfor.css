@@ -1,0 +1,114 @@
+body{
+    margin: 0;
+}
+.img-content{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.img-logo{
+}
+.content-logo{
+    display: flex;
+    align-self: flex-start;
+    padding-left: 4vh;
+    font-size: 15px;
+    color: #0066B2;
+    text-transform: uppercase;
+}
+.infor-body{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+.infor-min{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.infor-name{
+    margin-left: auto;
+    margin-right: auto;
+}
+.infor-max{
+    background-color: #A8E4FC5E;
+    width: 65%;
+}
+.avt-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+.infor-age{
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 10%;
+}
+    
+.text{
+    width: 40%;
+    text-align: justify;
+    padding-left: 20%;
+}    
+.data{
+    width: 60%;
+    text-align: justify;
+    padding-left: 10px;
+}
+.data-link{
+    text-decoration: none;
+}
+.underline{
+    width: 100%;
+    border: 1px solid #ccc;
+}
+.slogan{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.max-label{
+    display: flex;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.two-row{
+    display: flex;
+    width: 60%;
+}
+.gender{
+    display: flex;
+    width: 40%;
+}
+.max-text{
+    width: 40%;
+}
+.max-data{
+    width: 65%;
+    text-transform: capitalize;
+}
+.one-row{
+    display: flex;
+    width: 100%;
+}
+.one-text{
+    width: 23%;
+}
+.input-data, .one-data{
+    width: calc(100% - 23%);
+}
+.input-data{
+    background-color: #F5FCFF;
+}
+.end-margin{
+    margin-bottom: 15px;
+}

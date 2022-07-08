@@ -1,0 +1,23 @@
+.search-content{
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    margin-top: 20px;
+}
+.content{
+    font-size: 25px;
+    color: #2C5282;
+    width: 25%;
+}
+.content h3{
+    margin: 0;
+}
+.search-bar{
+    display: flex;
+    width: 30%;
+    align-items: flex-end;
+    justify-content: space-evenly
+}
+.search-bar h4{
+    margin: 0;
+}

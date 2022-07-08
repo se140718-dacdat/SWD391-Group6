@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 body{
     margin: 0;
 }
-#crprofile .header {
+.header {
     width: 100%;
     display: flex;
     justify-content: center;
     background-color: rgb(233, 114, 17);
     height: 50px;
 }
-#crprofile .body{
+.body{
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -17,7 +18,7 @@ body{
     height: 82vh;
     margin-bottom: 120px;
 }
-#crprofile .img-content{
+.img-content{
     display: flex;
     align-items: baseline;
     justify-content: center;
@@ -54,6 +55,7 @@ body{
 }
 .cr-content{
     padding-right: 30px;
+    width: 35%;
 }
 .form-cr{
     display: flex;
@@ -74,6 +76,8 @@ body{
 .if{
     width: 500px;
     padding: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
 }
 .txtname{
     padding-left: 50px;
@@ -91,9 +95,10 @@ body{
     align-items: center;
 }
 .input-intr{
-    width: 91%;
+    width: 100%;
     padding: 8px;
     height: 140px;
+    resize: none;
 }
 .btn-action{
     display: flex;

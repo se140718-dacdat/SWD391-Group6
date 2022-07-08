@@ -8,7 +8,7 @@ import { ResponseData, Roles, User } from "./model";
 import StudentHeader from "./components/modules/pagecomponents/StudentHeader/StudentHeader";
 import AdminHeader from "./components/modules/pagecomponents/AdminHeader/AdminHeader";
 import CRHeader from "./components/modules/pagecomponents/CRHeader/CRHeader";
-import CRProfile from "./components/pages/Company/CRProfile";
+import CRProfile from "./components/pages/CRProfile/CRProfile";
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {

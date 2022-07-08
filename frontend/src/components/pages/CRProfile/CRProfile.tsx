@@ -1,22 +1,31 @@
 import React, { useState, Dispatch, FC, SetStateAction } from "react";
 import CRHeader from "../../modules/pagecomponents/CRHeader/CRHeader";
-import { User } from "../../../model";
+import { User, Company } from "../../../model";
 import "./CRProfile.css";
 import { useForm } from "../../modules/pagecomponents/FormCR/FromCR";
+const MockData = [
+  {
+    companyID: 1,
+    companyName: "ABC Company",
+    address: "Bien Hoa, Dong Nai",
+    phone: "0123456789",
+    email: "abcxyz123@gmail.com",
+    webSite: "https://www.facebook.com/LongPham139/",
+    fieldName: 1,
+    introduction: "Good for you",
+    imageURL: "/frontend/public/images/avatar-company.png",
+    activeStatus: true,
+    applyPosition: "Oke",
+  },
+];
 
 const Profile: React.FC = () => {
-  const initialState = {
-    phone: "",
-    workplace: "",
-    comEmail: "",
-    comIntroduction: "",
-  };
-  const { onChange, onSubmit, values } = useForm(
-    inforCompanyCallback,
-    initialState
-  );
+  const { onChange, onSubmit, values } = useForm(inforCompanyCallback);
   async function inforCompanyCallback() {
     // send "values" to database
+  }
+  {
+    console.log();
   }
   return (
     <div id="crprofile">
@@ -43,11 +52,11 @@ const Profile: React.FC = () => {
           <div className="name-web">
             <div className="name-cr">
               <h3 className="cr-content">Company Name</h3>
-              <h3 className="cr-content">Netcompany VietNam</h3>
+              <h3 className="cr-content">{MockData[0].companyName}</h3>
             </div>
             <div className="name-cr">
-              <h3 className="cr-content">Company Name</h3>
-              <h3 className="cr-content">Netcompany VietNam</h3>
+              <h3 className="cr-content">Website</h3>
+              <h3 className="cr-content">{MockData[0].webSite}</h3>
             </div>
           </div>
         </div>
@@ -68,6 +77,7 @@ const Profile: React.FC = () => {
                     id="phone"
                     type="tel"
                     className="if"
+                    defaultValue={MockData[0].phone}
                     onChange={onChange}
                     required
                   />
@@ -84,6 +94,7 @@ const Profile: React.FC = () => {
                     id="workplace"
                     type="text"
                     className="if"
+                    defaultValue={MockData[0].address}
                     onChange={onChange}
                     required
                   />
@@ -100,6 +111,7 @@ const Profile: React.FC = () => {
                     id="companyemail"
                     type="text"
                     className="if"
+                    defaultValue={MockData[0].email}
                     onChange={onChange}
                     required
                   />
@@ -120,12 +132,11 @@ const Profile: React.FC = () => {
                 </label>
 
                 <div className="input-intro">
-                  <input
+                  <textarea
                     name="introduction"
                     id="com-intro"
-                    type="text"
                     className="input-intr"
-                    onChange={onChange}
+                    defaultValue={MockData[0].introduction}
                     required
                   />
                 </div>
