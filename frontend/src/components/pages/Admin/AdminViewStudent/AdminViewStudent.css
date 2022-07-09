@@ -1,203 +1,207 @@
-/* SEARCH BAR  */
-
-#CREViewCompany .clear {
+#CREManageStudent .clear::after {
     content: "";
     clear: both;
     display: table;
 }
 
-#CREViewCompany .vertical-algin * {
-    display: inline-block;
+#CREManageStudent .clear {
+    width: 100%;
 }
 
-#CREViewCompany .content-heading {
-    color: #2C5282;
-    font-size: 2.4rem;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#CREViewCompany .cr-search {
-    width: 40%;
-    position: relative;
-    float: right;
-    text-align: right;
-    font-size: 1.8rem;
-    color: #2C5282;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#CREViewCompany .cr-search-form {
-    width: 400px;
-}
-
-#CREViewCompany .cr-search-bar {
-    right: inherit;
-    width: 70%;
+#CREManageStudent .search-bar {
+    width: 90%;
     padding: 6px 0;
+    text-indent: 20px;
+    font-size: 1.8rem;
+    border: none;
     background-color: #DBF1FF;
     outline: none;
+}
+
+#CREManageStudent .btn-search {
+    width: 10%;
+    font-size: 1.8rem;
+    padding: 6px 0;
     border: none;
-    text-indent: 20px;
-}
-
-#CREViewCompany .cr-search i {
-    position: absolute;
-    right: 8px;
-    top: 8px;
-}
-
-
-/* TITLE CONTENT  */
-
-#CREViewCompany .content-title {
-    width: 100%;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#CREViewCompany .company-item {
-    width: 100%;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-#CREViewCompany .content-title {
-    padding: 24px 16px 8px 16px;
-    border-bottom: 1px solid;
-    color: #2C5282;
-}
-
-#CREViewCompany .company-list {
-    margin-top: 24px;
-}
-
-#CREViewCompany .company-item {
-    background-color: #F7FAFC;
-    padding: 24px 16px;
+    background-color: var(--primary-color);
     margin-bottom: 8px;
-}
-
-#CREViewCompany .content-title>* {
-    align-self: center;
-    display: inline-block;
-}
-
-#CREViewCompany .company-item>* {
-    display: inline-block;
-}
-
-#CREViewCompany .col2 {
-    width: 30%;
-}
-
-#CREViewCompany .col3 {
-    padding-right: 24px;
-    width: 45%;
-}
-
-#CREViewCompany .col4 {
-    width: 10%;
-    margin-right: 50px;
-}
-
-#CREViewCompany .col5 {
-    width: 10%;
-}
-
-#CREViewCompany .col4,
-#CREViewCompany .col5 {
     color: var(--white-color);
-    border: none;
-    font-size: 1.4rem;
-    text-transform: uppercase;
     font-weight: bold;
-    padding: 10px 0;
-    border-radius: 5px;
+    border-radius: 0 2px 2px 0;
 }
 
-#CREViewCompany .col4 {
+#CREManageStudent .filter-select {
+    margin-top: 8px;
+    float: right;
+    padding: 4px;
+    font-size: 1.8rem;
+}
+
+#CREManageStudent .table-student {
+    margin: 6px 0;
+    width: 100%;
+    background-color: rgba(242, 114, 41, 67%);
+    border: 2px solid var(--black-color);
+}
+
+#CREManageStudent .table-student * {
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 8px 0;
+    border: 1px solid #E3F0FC;
+    vertical-align: middle;
+}
+
+#CREManageStudent .col1 {
+    width: 8%;
+}
+
+#CREManageStudent .col2 {
+    width: 10%;
+}
+
+#CREManageStudent .col3 {
+    width: 15%;
+}
+
+#CREManageStudent .col4 {
+    width: 10%;
+}
+
+#CREManageStudent .col5 {
+    width: 10%;
+}
+
+#CREManageStudent .col6 {
+    width: 10%;
+    padding: 0;
+}
+
+#CREManageStudent .col7 {
+    width: 10%;
+    padding: 0;
+}
+
+#CREManageStudent .btn-edit,
+#CREManageStudent .btn-delete {
+    width: 100%;
+    color: var(--white-color);
+    font-weight: bold;
+    border: none;
+}
+
+#CREManageStudent .btn-edit:hover,
+#CREManageStudent .btn-delete:hover,
+#CREManageStudent .paging-btn:hover,
+#CREManageStudent .btn-search:hover,
+#CREManageStudent .filter-select:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+#CREManageStudent .btn-edit {
     background-color: #2C5282;
 }
 
-#CREViewCompany .col5 {
+#CREManageStudent .btn-delete {
     background-color: #D14848;
 }
 
+#CREManageStudent .table-student-title * {
+    color: var(--white-color);
+    font-size: 2.4rem;
+}
 
-/* FILTER  */
+#CREManageStudent #CRViewStudentGrade .paging {
+    display: flex;
+    justify-content: center;
+}
 
-#CREViewCompany .filter {
-    color: #0066B2;
+#CREManageStudent #CRViewStudentGrade .paging * {
     font-size: 2.2rem;
-    margin: 16px 0;
 }
 
-#CREViewCompany .filter--item {
-    display: inline-block;
-}
-
-#CREViewCompany #job-number {
-    font-weight: bold;
-}
-
-#CREViewCompany .filter--select {
-    float: right;
-    font-weight: bold;
-    margin-left: 40px;
-    position: relative;
-}
-
-#CREViewCompany .filter--select i {
-    margin-left: 2px;
-}
-
-#CREViewCompany .filter--select:hover {
-    cursor: pointer;
-    color: var(--black-color);
-}
-
-#CREViewCompany #majors-dropdown,
-#CREViewCompany #types-dropdown {
-    display: none;
-    position: absolute;
+#CREManageStudent #CRViewStudentGrade .paging-btn {
+    border: 1px solid var(--primary-color);
     background-color: var(--white-color);
-    min-width: 300px;
-    padding: 26px 28px 20px 28px;
+    padding: 8px 6px;
+    color: var(--primary-color);
 }
 
-#CREViewCompany .majors:hover #majors-dropdown,
-#CREViewCompany .types:hover #types-dropdown {
-    display: block;
+#CREManageStudent .pre-btn {
+    border-radius: 10px 0 0 10px;
 }
 
-#CREViewCompany .majors-item,
-#CREViewCompany .types-item {
-    color: #0066B2;
+#CREManageStudent .next-btn {
+    border-radius: 0 10px 10px 0;
+}
+
+#CREManageStudent .page-number {
+    background-color: var(--primary-color);
+    padding: 9px 12px;
+    color: var(--white-color);
+}
+
+#CREManageStudent .csv {
+    float: left;
+    text-align: left;
+    font-size: 1.8rem;
+}
+
+#CREManageStudent .csv h3 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
     margin-bottom: 4px;
 }
 
-#CREViewCompany #CREViewCompany .majors-item:hover,
-.types-item:hover {
-    color: var(--primary-color);
+#CREManageStudent .csv-link>* {
+    display: inline-block;
+}
+
+#CREManageStudent .csv-link p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 8px;
+    vertical-align: top;
+    line-height: 43px;
+}
+
+#CREManageStudent .csv-link a {
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+
+#CREManageStudent .csv-file {
+    font-size: 1.2rem;
+    background-color: var(--white-color);
+    padding: 6px;
+    min-width: 230px;
 }
 
 
 /* MODAL  */
 
-.row {
-    display: flex;
-    justify-content: space-between;
+#CREManageStudent .row {
+    width: 100%;
+    margin: 0 !important;
 }
 
-.col-haft {
+#CREManageStudent .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#CREManageStudent .col-haft {
     width: 45%;
+    display: inline-block;
+    margin-right: 5%;
+    margin-top: 24px;
 }
 
-#CREViewCompany .modal {
+#CREManageStudent .modal {
     display: none;
     z-index: 3;
     position: fixed;
@@ -209,12 +213,12 @@
     background-color: rgba(242, 114, 41, 0.7);
 }
 
-#CREViewCompany .modal-header {
+#CREManageStudent .modal-header {
     border: none !important;
     padding: 24px;
 }
 
-#CREViewCompany .modal-content {
+#CREManageStudent .modal-content {
     position: relative;
     top: 12%;
     width: 70%;
@@ -225,7 +229,7 @@
     padding-bottom: 52px;
 }
 
-#CREViewCompany .close-modal {
+#CREManageStudent .close-modal {
     top: 0;
     right: 0;
     position: absolute;
@@ -235,125 +239,64 @@
     display: block;
 }
 
-#CREViewCompany .close-modal:hover {
+#CREManageStudent .close-modal:hover {
     cursor: pointer;
 }
 
-#CREViewCompany .modal-title {
+#CREManageStudent .col-haft input {
     width: 100%;
-    margin-top: 32px;
+    padding: 8px 0;
+    font-size: 1.6rem;
+    text-indent: 15px;
 }
 
-#CREViewCompany .modal-title>* {
-    display: inline-block;
+#CREManageStudent .birth {
+    text-indent: 10px !important;
 }
 
-#CREViewCompany .modal-company-logo {
-    max-height: 150px;
-    object-fit: cover;
-    line-height: 20rem;
-}
-
-#CREViewCompany .company-introduction {
-    display: flex;
-    text-align: left;
-}
-
-#CREViewCompany .popup-company-name {
-    color: var(--primary-color);
-    font-size: 3.6rem;
-    line-height: 150px;
+#CREManageStudent .col-haft p,
+#CREManageStudent .col-haft select {
+    width: 100%;
+    font-size: 2rem;
     font-weight: bold;
 }
 
-#CREViewCompany .company-name::first-letter {
-    text-transform: capitalize;
+#CREManageStudent .col-haft select {
+    padding: 6px 0;
+    text-indent: 10px;
 }
 
-#CREViewCompany .company-location {
-    font-size: 2rem;
-    text-transform: capitalize;
-    font-weight: 500;
+#CREManageStudent .right {
+    text-align: right;
 }
 
-#CREViewCompany .hiring-title {
-    display: block;
-    font-size: 3.6rem;
-    margin: 32px 0;
-    color: var(--primary-color);
+#CREManageStudent .btn-submit {
+    border: none;
+    padding: 12px 60px;
+    font-size: 1.8rem;
     text-transform: uppercase;
     font-weight: bold;
-    line-height: 3.6rem;
-    text-align: center;
+    border-radius: 24px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    outline: none;
 }
 
-#CREViewCompany .company-infor {
-    margin-top: 14px;
+#CREManageStudent .student-id {
+    color: var(--primary-color);
+    font-size: 2.4rem !important;
 }
 
-#CREViewCompany .decoration {
-    border-bottom: 1px solid #C4C4C4;
-    margin-bottom: 4px;
+#CREManageStudent .btn-submit:hover,
+#CREManageStudent .col-haft select:hover {
+    cursor: pointer;
+    opacity: 0.9;
 }
 
-#CREViewCompany .company-infor-title {
-    font-weight: bold;
-    font-size: 2.4rem;
-    margin-bottom: 12px;
+#CREManageStudent .table-student-info .col6 {
+    background-color: #2C5282;
 }
 
-#CREViewCompany .company-infor-detail {
-    font-size: 2rem;
-    text-transform: capitalize;
-}
-
-#CREViewCompany .company-infor-desc {
-    font-size: 2rem;
-    width: 100%;
-    background-color: #F7F7F7;
-    padding: 16px;
-    overflow-y: scroll;
-}
-
-#CREViewCompany .js-website {
-    text-transform: none !important;
-}
-
-#CREViewCompany .divide {
-    display: flex;
-    margin-top: 32px;
-}
-
-#CREViewCompany .divide-name {
-    flex-grow: 0.1;
-    font-size: 1.8rem;
-    color: #c4c4c4;
-    margin-right: 4px;
-}
-
-#CREViewCompany .divide-line {
-    border-bottom: 1px solid #c4c4c4;
-    flex-grow: 200;
-    margin-bottom: 6px;
-}
-
-#CREViewCompany .recruiting-details {
-    width: 100%;
-}
-
-#CREViewCompany .recruiting-details * {
-    display: inline-block;
-    font-size: 2.4rem;
-    font-weight: bold;
-    margin: 12px 0;
-}
-
-#CREViewCompany .modal-col1 {
-    width: 30%;
-    text-transform: capitalize;
-}
-
-#CREViewCompany .modal-col2 {
-    width: 65%;
-    text-align: left;
+#CREManageStudent .table-student-info .col7 {
+    background-color: #D14848;
 }

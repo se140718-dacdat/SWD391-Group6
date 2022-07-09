@@ -7,7 +7,7 @@ const studentSlice = createSlice({
             student: null,
             isFetching: false,
             error: false
-        }
+        },
     },
     reducers: {
         getStudentStart: (state) => {
@@ -22,13 +22,28 @@ const studentSlice = createSlice({
             state.student.isFetching = false;
             state.student.error = true;
         },
+        getStudentListStart: (state) => {
+            state.student.isFetching = true;
+        },
+        getStudentListSuccess: (state, action) => {
+            state.student.isFetching = false;
+            state.student.students = action.payload;
+            state.student.error = false;
+        },
+        getStudentListFailed: (state) => {
+            state.student.isFetching = false;
+            state.student.error = true;
+        },
     }
 });
 
 export const {
     getStudentStart,
     getStudentSuccess,
-    getStudentFailed
+    getStudentFailed,
+    getStudentListStart,
+    getStudentListSuccess,
+    getStudentListFailed
 } = studentSlice.actions;
 
 export default studentSlice.reducer;

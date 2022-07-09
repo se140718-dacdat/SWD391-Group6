@@ -1,6 +1,6 @@
 import axios from "axios";
 import { loginFailed, loginStart, loginSuccess, logoutFailed, logoutStart, logoutSuccess } from "./authSlice";
-import { getStudentFailed, getStudentStart, getStudentSuccess } from "./studentSlice";
+import { getStudentFailed, getStudentListStart, getStudentListSuccess, getStudentStart, getStudentSuccess } from "./studentSlice";
 import { getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice";
 
 export const loginUser = async(user, dispatch, navigate) => {
@@ -44,6 +44,16 @@ export const getStudent = async(dispatch, username) => {
     try {
         const res = await axios.get(`http://localhost:8000/api/student/${username}`);
         dispatch(getStudentSuccess(res.data));
+    } catch (err) {
+        dispatch(getStudentFailed());
+    }
+}
+
+export const getStudentList = async(dispatch) => {
+    dispatch(getStudentListStart());
+    try {
+        const res = await axios.get("http://localhost:8000/api/student/get-all-student");
+        dispatch(getStudentListSuccess(res.data));
     } catch (err) {
         dispatch(getStudentFailed());
     }

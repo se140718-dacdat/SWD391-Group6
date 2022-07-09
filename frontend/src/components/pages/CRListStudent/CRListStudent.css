@@ -1,0 +1,155 @@
+#CRListStudent .img-content {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+#CRListStudent {
+    background-color: #F7F7F7;
+}
+
+#CRListStudent .search-bar {
+    display: flex;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+#CRListStudent .search-input {
+    width: 87%;
+    padding-left: 55px;
+    border: none;
+    background-color: #fff;
+}
+
+#CRListStudent .search--bar--icon {}
+
+#CRListStudent .clear-icon {}
+
+#CRListStudent .clear-icon:hover {
+    cursor: pointer;
+    opacity: 0 .8;
+}
+
+#CRListStudent .search-icon {}
+
+#CRListStudent .btn-search {
+    width: 13%;
+    border: none;
+    background-color: #F27229;
+    color: #fff;
+}
+
+#CRListStudent .title-edit {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #6199F6;
+}
+
+#CRListStudent .table-list {
+    width: 60%;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#CRListStudent .table-header {
+    display: table-header-group;
+    background-color: #F27229AB;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#CRListStudent .table-header-cell {
+    display: table-cell;
+    padding: 10px;
+    text-align: justify;
+    border: 1px solid #fff;
+    text-align: center;
+    color: #fff;
+}
+
+#CRListStudent .table-body {
+    display: table-row-group;
+}
+
+#CRListStudent .table-row {
+    display: table-row;
+}
+
+#CRListStudent .table-body-cell {
+    background-color: #F27229AB;
+    display: table-cell;
+    border: 1px solid #fff;
+    text-align: center;
+}
+
+#CRListStudent .table-row-twocol {
+    display: flex;
+    flex-direction: column;
+    line-height: 40px;
+}
+
+#CRListStudent .link-details {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#CRListStudent .footer {
+    width: 70%;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+#CRListStudent .import {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+#CRListStudent .import-body {
+    display: flex;
+}
+
+#CRListStudent .ib-txt {
+    margin: 0;
+}
+
+#CRListStudent .input-file {
+    margin-left: 10px;
+}
+
+#CRListStudent .paging {
+    display: flex;
+    width: 20%;
+    justify-content: center;
+    align-items: center
+}
+
+#CRListStudent .paging-right,
+#CRListStudent .paging-left {
+    width: 40%;
+    text-align: center;
+}
+
+#CRListStudent .paging-center {
+    width: 10%;
+    text-align: center;
+}
+
+#CRListStudent .export {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+#CRListStudent .export-link {
+    text-decoration: none;
+    font-size: 21px;
+}

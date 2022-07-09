@@ -17,18 +17,18 @@ export const studentList: Student[] = [{
 }]
 
 export const fieldList: Field[] = [{
-        "fieldId": "SE",
+        "fieldID": "SE",
         "fieldName": "Software Engineer",
     },
     {
-        "fieldId": "IA",
+        "fieldID": "IA",
         "fieldName": "Insurance Agency",
     },
     {
-        "fieldId": "AI",
+        "fieldID": "AI",
         "fieldName": "Automatic Information"
     }, {
-        "fieldId": "GD",
+        "fieldID": "GD",
         "fieldName": "Graphic Design"
     }
 ]
