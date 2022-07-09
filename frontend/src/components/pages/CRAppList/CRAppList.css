@@ -16,8 +16,92 @@
     display: flex;
     width: 30%;
     align-items: flex-end;
-    justify-content: space-evenly
+    justify-content: center
 }
 .search-bar h4{
     margin: 0;
+    line-height: 27px;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+.txt-search{
+    color: #2C5282;
+}
+.search-icon{
+    position: absolute;
+    line-height: 27px;
+    right: 12.3%;
+}
+.input-search-bar{
+    background-color: #DBF1FF;
+    padding: 2px;
+    width: 60%;
+    line-height: 23px;
+    border: none;
+}
+.table-list-student{
+    width: 100%;
+    display: table;padding-top: 5%;
+    padding-left: 1%;
+}
+.table-header{
+    display: table-header-group;
+    font-weight: bold;
+    font-size: 25px;
+}
+.table-header-cell{
+    display: table-cell;
+    padding-bottom: 10px;
+    text-align: justify;
+    border-bottom: 1px solid black;
+    color: #2C5282;
+    font-size: 18px;
+}
+.table-body{
+    display: table-row-group;
+}
+.table-row{
+    display: table-row;
+    height: 70px;background-color: #F7FAFC;
+}
+.table-body-cell{
+    display: table-cell;
+    padding: 15px;
+    text-align: justify;
+    line-height: 70px;
+    font-weight: bold;
+    
+}
+.group-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.btn-detail, .btn-accept, .btn-decline{
+    text-transform: uppercase;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5%;
+}
+.btn-detail{
+    background-color: #2C5282;
+}
+.btn-accept{
+    background-color: #62AA7A;
+}
+.btn-decline{
+    background-color: #D14848;
+}
+.btn-detail:hover{
+    opacity: 65%;
+    cursor: pointer;
+}
+.btn-accept:hover{
+    opacity: 65%;
+    cursor: pointer;
+}
+.btn-decline:hover{
+    opacity: 65%;
+    cursor: pointer;
 }
