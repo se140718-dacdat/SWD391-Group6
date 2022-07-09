@@ -5,7 +5,7 @@ import { Report, ResponseData, Student, User } from '../../../model';
 import { studentList, reportList } from '../../../data';
 import { useDispatch, useSelector } from 'react-redux';
 import { navigate } from '@reach/router';
-import { getStudent } from '../../../redux/apiRequest';
+import { getStudent, getStudentList } from '../../../redux/apiRequest';
 import { useNavigate } from 'react-router-dom';
 
 

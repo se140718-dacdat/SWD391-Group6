@@ -14,6 +14,10 @@ import StudentProfile from './components/pages/StudentProfile/StudentProfile';
 import AdminViewStudent from './components/pages/Admin/AdminViewStudent/AdminViewStudent';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
+import CRListStudent from './components/pages/CRListStudent/CRListStudent';
+import CRSInfor from './components/pages/CRStudentInfor/CRSInfor';
+import CRProfile from './components/pages/CRProfile/CRProfile';
+import CRAppList from './components/pages/CRAppList/CRAppList';
 const App: React.FC = () => {
   const user = useSelector((state: any) => state.auth.login.currentUser);
 
@@ -36,12 +40,15 @@ const App: React.FC = () => {
         <Route path='/student/companies' element={<StudentViewCompany />}></Route>
         <Route path='/student/profile' element={<StudentProfile />}></Route>
         <Route path='/cre/manage/students/1' element={<AdminViewStudent />}></Route>
+        <Route path='/cr/students' element={<CRListStudent />}></Route>
+        <Route path='/cr/profile' element={<CRProfile />}></Route>
+        <Route path='/cr/requests' element={<CRAppList />}></Route>
+        <Route path='/cr/student-profile' element={<CRSInfor />}></Route>
         <Route path='/' element={<Index></Index>}></Route>;
       </Routes>
       <Footer></Footer>
     </BrowserRouter>
   );
-}
-
+};
 
 export default App;

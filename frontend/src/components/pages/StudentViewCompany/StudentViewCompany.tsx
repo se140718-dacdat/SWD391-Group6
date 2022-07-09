@@ -21,6 +21,12 @@ const StudentViewCompany: React.FC = () => {
             pages.push(index++);
         })
         console.log(pages);
+        window.onclick = (e: MouseEvent) => {
+            const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
+            if (e.target == modal) {
+                hideRecuitment();
+            }
+        }
     }, []);
 
     const indexOfLastPost = currentPage * postsPerPage;
