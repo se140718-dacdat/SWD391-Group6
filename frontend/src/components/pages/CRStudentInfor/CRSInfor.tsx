@@ -19,7 +19,7 @@ const MockData = [
 ];
 function CRSInfor({ }: Props) {
   return (
-    <div>
+    <div id="CRSInfor">
       <div className="infor-body">
         <div className="infor-min">
           <div className="infor-name">

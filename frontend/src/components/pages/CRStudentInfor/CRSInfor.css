@@ -1,8 +1,4 @@
-body {
-    margin: 0;
-}
-
-.img-content {
+#CRSInfor .img-content {
     display: flex;
     align-items: baseline;
     justify-content: center;
@@ -10,7 +6,7 @@ body {
     margin-bottom: 30px;
 }
 
-.infor-body {
+#CRSInfor .infor-body {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -19,32 +15,32 @@ body {
     font-size: 16px;
 }
 
-.infor-min {
+#CRSInfor .infor-min {
     width: 35%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.infor-name {
+#CRSInfor .infor-name {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 14px;
 }
 
-.infor-max {
+#CRSInfor .infor-max {
     background-color: #A8E4FC5E;
     width: 65%;
 }
 
-.avt-img {
+#CRSInfor .avt-img {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 40%;
 }
 
-.infor-age {
+#CRSInfor .infor-age {
     display: flex;
     width: 80%;
     margin-left: auto;
@@ -52,36 +48,36 @@ body {
     height: 10%;
 }
 
-.text {
+#CRSInfor .text {
     width: 40%;
     text-align: justify;
     padding-left: 20%;
 }
 
-.data {
+#CRSInfor .data {
     width: 60%;
     text-align: justify;
     padding-left: 10px;
 }
 
-.data-link {
+#CRSInfor .data-link {
     text-decoration: none;
 }
 
-.underline {
+#CRSInfor .underline {
     width: 100%;
     border: 1px solid #ccc;
     margin-bottom: 10px;
 }
 
-.slogan h2 {
+#CRSInfor .slogan h2 {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     padding: 10px 0;
 }
 
-.max-label {
+#CRSInfor .max-label {
     display: flex;
     width: 80%;
     margin-left: auto;
@@ -89,43 +85,43 @@ body {
     margin-bottom: 10px;
 }
 
-.two-row {
+#CRSInfor .two-row {
     display: flex;
     width: 60%;
 }
 
-.gender {
+#CRSInfor .gender {
     display: flex;
     width: 40%;
 }
 
-.max-text {
+#CRSInfor .max-text {
     width: 40%;
 }
 
-.max-data {
+#CRSInfor .max-data {
     width: 65%;
     text-transform: capitalize;
 }
 
-.one-row {
+#CRSInfor .one-row {
     display: flex;
     width: 100%;
 }
 
-.one-text {
+#CRSInfor .one-text {
     width: 23%;
 }
 
-.input-data,
-.one-data {
+#CRSInfor .input-data,
+#CRSInfor .one-data {
     width: calc(100% - 23%);
 }
 
-.input-data {
+#CRSInfor .input-data {
     background-color: #F5FCFF;
 }
 
-.end-margin {
+#CRSInfor .end-margin {
     margin-bottom: 15px;
 }

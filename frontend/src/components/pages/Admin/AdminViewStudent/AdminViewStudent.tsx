@@ -198,7 +198,7 @@ const AdminViewStudent = () => {
                         <select className="filter-select" name="field">
                             <option value='0'>All</option>
                             {
-                                field.map(item =>
+                                field?.map(item =>
                                     <option value={item.fieldID}>{item.fieldName}</option>
                                 )
                             }
@@ -220,7 +220,7 @@ const AdminViewStudent = () => {
                     </thead>
                     <tbody>
                         {
-                            studentList.map(item =>
+                            studentList?.map(item =>
                                 <tr className="table-student-info">
                                     <td className="col1">{item.studentID}</td>
                                     <td className="col2">{item.fullName}</td>
