@@ -7,7 +7,7 @@
 }
 
 #CRViewRequest .cr-search {
-    width: 40%;
+    width: 50%;
     font-size: 1.8rem;
     color: #2C5282;
     text-transform: uppercase;
@@ -17,7 +17,9 @@
 }
 
 #CRViewRequest .cr-search * {
+
     display: inline-block;
+    width: 20%;
 }
 
 #CRViewRequest .cr-search p,
@@ -27,7 +29,7 @@
 
 #CRViewRequest .cr-search-bar {
     position: absolute;
-    width: 85%;
+    width: 80%;
     padding: 10px 10px;
     font-size: 1.6rem;
     right: 0;
@@ -39,8 +41,10 @@
 
 #CRViewRequest .cr-search i {
     position: absolute;
+    width: 5%;
     right: 8px;
     font-size: 2rem;
+    line-height: 38px;
 }
 
 
@@ -63,6 +67,8 @@
 }
 
 #CRViewRequest .student-list {
+    height: 500px;
+    overflow: auto;
     margin-top: 24px;
 }
 
@@ -74,7 +80,7 @@
 
 #CRViewRequest .content-title>*,
 #CRViewRequest .student-item>* {
-    margin-right: 24px;
+    /* margin-right: 24px; */
     align-self: center;
 }
 
@@ -116,10 +122,15 @@
     font-size: 1.4rem;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 12px;
+    line-height: 40px;
     border-radius: 5px;
 }
 
+#CRViewRequest .btn-detail, 
+#CRViewRequest .btn-accept, 
+#CRViewRequest .btn-delete{
+    font-size: 10px;
+}
 #CRViewRequest .btn-detail {
     background-color: #2C5282;
 }
