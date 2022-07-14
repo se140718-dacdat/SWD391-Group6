@@ -140,10 +140,6 @@ const StudentViewCompany: React.FC = () => {
                             <a href={company?.webSite} className="company-infor-detail js-website">{company?.webSite}</a>
                         </div>
                         <div className="company-infor">
-                            <p className="company-infor-title">Industry requirement</p>
-                            <p className="company-infor-detail js-industry">{company?.fieldName}</p>
-                        </div>
-                        <div className="company-infor">
                             <p className="company-infor-title">Workplace</p>
                             <p className="company-infor-detail js-workplace">{company?.address}</p>
                         </div>

@@ -7,6 +7,7 @@ const authRoute = require('./routes/auth');
 const responseDataRoute = require('./routes/responseData');
 const userRoute = require('./routes/user');
 const studentRoute = require('./routes/student');
+const recruitmentRoute = require('./routes/recruitment')
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/responseData", responseDataRoute);
 app.use("/api/user", userRoute);
 app.use("/api/student", studentRoute);
+app.use("/api/recruitment", recruitmentRoute);
+
 
 
 app.listen(8000, () => {

@@ -21,7 +21,6 @@ const AdminHeader: React.FC<Props> = props => {
             <div id="navbar">
                 <div className="nav-list">
                     <NavLink to={'/cre/companies/1'} className="nav-item"><span>companies</span></NavLink>
-                    <NavLink to={'/cre/students/0/1'} className="nav-item"><span>OJT report</span></NavLink>
                     <NavLink to={'/cre/manage/students/1'} className="nav-item"><span>Students</span></NavLink>
                     <a onClick={logout} className="nav-item session"><span>logout</span></a>
                 </div>
