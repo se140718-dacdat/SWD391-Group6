@@ -11,13 +11,18 @@ import javax.persistence.*;
 @Getter @Setter @NoArgsConstructor
 public class User {
     @Id
+    @Column(name = "Username")
     private String username;
 
+    @Column(name = "Password")
     private String password;
+    @Column(name = "FullName")
     private String fullname;
+    @Column(name = "Email")
     private String email;
+    @Column(name = "RoleID")
     private int role;
-    private boolean isActive = true;
-
+    @Column(name = "AccountStatus")
+    private boolean isActive;
 
 }
