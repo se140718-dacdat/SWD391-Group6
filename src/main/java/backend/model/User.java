@@ -12,17 +12,17 @@ import javax.persistence.*;
 public class User {
     @Id
     @Column(name = "Username")
-    private String username;
+    protected String username;
 
     @Column(name = "Password")
-    private String password;
+    protected String password;
     @Column(name = "FullName")
-    private String fullname;
+    protected String fullname;
     @Column(name = "Email")
-    private String email;
+    protected String email;
     @Column(name = "RoleID")
-    private int role;
+    protected int role;
     @Column(name = "AccountStatus")
-    private boolean isActive;
+    protected boolean isActive;
 
 }

@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(value = "/users", path = "/JSON", produces = "application/json")
 public class UsersController {
     private final UserRepository userRepository;
 
     @Autowired
     private UserService userService;
 
-    public UsersController (UserRepository userRepository) {
+    public UsersController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/login")
-    public User loginUser(String username, String password) {
+    @GetMapping("/login/{username}/{password}")
+    public User loginUser(@PathVariable("username") String username, @PathVariable("password") String password) {
         return userService.getUser(username, password);
     }
 }

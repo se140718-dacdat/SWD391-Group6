@@ -9,14 +9,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Students")
 @Getter @Setter @NoArgsConstructor
-public class Student extends User {
+public class Student {
 
     @Id
     @Column (name = "StudentID")
     private String id;
 
+    @Column(name = "Username")
+    private String username;
+
     @OneToOne
     private User user;
+
+    @Column (name = "Major")
+    private int majorId;
+
     @ManyToOne
     private Major major;
 

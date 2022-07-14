@@ -1,12 +1,10 @@
 package backend.service;
 
 import backend.model.Student;
-import backend.model.User;
 import backend.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class StudentService {
-
     @Autowired
     private StudentRepository studentRepository;
 
@@ -17,4 +15,5 @@ public class StudentService {
     public Student getStudentById(String studentId) {
         return studentRepository.getStudentByStudentId(studentId);
     }
+
 }
