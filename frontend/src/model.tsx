@@ -25,6 +25,8 @@ export interface Student extends User {
   cV_URL: string;
   ojtStatus: boolean;
   username: string;
+  fullName: string;
+  email: string;
 }
 export interface Field {
   fieldID: string;
@@ -42,13 +44,13 @@ export interface Company {
   companyName: string;
   address: string;
   phone: string;
-  email: string
+  email: string;
   webSite: string;
   careerField: Field[];
   fieldName: number;
   introduction: string;
   description: string;
-  imageURL: string
+  imageURL: string;
   activeStatus: boolean;
   applyPosition: string;
 }

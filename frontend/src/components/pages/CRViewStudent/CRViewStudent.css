@@ -54,7 +54,7 @@
 }
 
 #CRViewStudent .title-content {
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-transform: uppercase;
     color: #0066B2;
     align-self: center;
@@ -162,13 +162,14 @@
 }
 
 #CRViewStudent .search-input {
-    width: 90%;
+    width: 85%;
     padding: 10px;
     font-size: 1.8rem;
     text-indent: 32px;
     position: relative;
     border: none;
     outline: none;
+    max-height: 52px;
     background-color: #DBF1FF;
 }
 
@@ -183,8 +184,8 @@
 #CRViewStudent .clear-icon {
     position: absolute;
     z-index: 1;
-    right: 23.5%;
-    line-height: 45px;
+    right: 27.1%;
+    line-height: 52px;
     color: #000;
     opacity: 60%;
     font-size: 30px;
@@ -197,14 +198,15 @@
 
 #CRViewStudent .search-icon {
     font-size: 20px;
-    line-height: 45px;
+    line-height: 52px;
 }
 
 #CRViewStudent .btn-search {
-    width: 10%;
+    width: 15%;
     padding: 0 2px;
     font-size: 2.2rem;
     border-radius: 0 2px 2px 0;
+    height: 52px;
 }
 
 #CRViewStudent .filter {
@@ -222,10 +224,11 @@
 }
 
 #CRViewStudent .filter--select {
-    float: right;
+    float: left;
     font-weight: bold;
     margin-left: 40px;
     position: relative;
+    margin-bottom: 15px;
 }
 
 #CRViewStudent .filter--select i {
@@ -300,9 +303,12 @@
     border: 2px solid var(--black-color);
     width: 100%;
     background-color: rgba(242, 114, 41, 0.67);
-    padding-bottom: 24px;
+    margin-bottom: 15px;
 }
-
+.table tr.item{
+    display: table-row-group;
+    line-height: 50px;
+}
 #CRViewStudent .table * {
     vertical-align: middle;
     border: 1px solid #E3F0FC;

@@ -65,7 +65,7 @@ const CRViewRequest = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CRViewRequest
+export default CRViewRequest;
