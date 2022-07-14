@@ -1,5 +1,7 @@
 import axios from "axios";
 import { loginFailed, loginStart, loginSuccess, logoutFailed, logoutStart, logoutSuccess } from "./authSlice";
+import { getCompanyFailed, getCompanyListStart, getCompanyListSuccess, getCompanyStart, getCompanySuccess } from "./companySlice";
+import { getRecruitmentListFailed, getRecruitmentListStart, getRecruitmentListSuccess } from "./recruitmentSlice";
 import { getStudentFailed, getStudentListStart, getStudentListSuccess, getStudentStart, getStudentSuccess } from "./studentSlice";
 import { getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice";
 
@@ -56,5 +58,35 @@ export const getStudentList = async(dispatch) => {
         dispatch(getStudentListSuccess(res.data));
     } catch (err) {
         dispatch(getStudentFailed());
+    }
+}
+
+export const getCompany = async(dispatch, companyID) => {
+    dispatch(getCompanyStart());
+    try {
+        const res = await axios.get(`http://localhost:8000/api/company/${companyID}`);
+        dispatch(getCompanySuccess(res.data));
+    } catch (err) {
+        dispatch(getCompanyFailed());
+    }
+}
+
+export const getCompanyList = async(dispatch) => {
+    dispatch(getCompanyListStart());
+    try {
+        const res = await axios.get("http://localhost:8000/api/company/get-all-company");
+        dispatch(getCompanyListSuccess(res.data));
+    } catch (err) {
+        dispatch(getCompanyFailed());
+    }
+}
+
+export const getRecruitmentList = async(dispatch, companyID) => {
+    dispatch(getRecruitmentListStart());
+    try {
+        const res = await axios.get(`http://localhost:8000/api/recruitment/${companyID}`);
+        dispatch(getRecruitmentListSuccess(res.data));
+    } catch (err) {
+        dispatch(getRecruitmentListFailed());
     }
 }

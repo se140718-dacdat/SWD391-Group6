@@ -183,15 +183,15 @@ const AdminViewStudent = () => {
                     <form onSubmit={searchSubmit} className="clear">
                         <input className="search-bar" placeholder="Search student's name" type="text" name='search' />
                         <button className="btn-search" type='submit'>Search</button>
-                        <div className="csv">
-                            <h3>import form csv</h3>
-                            <div className="csv-link">
-                                <p>csv file</p>
+                        <div className="exe">
+                            <h3>import form exe</h3>
+                            <div className="exe-link">
+                                <p>exe file</p>
                                 <div className="block">
-                                    <div className="csv-file">
-                                        <input type='file' accept={'.csv'} onChange={studentInsertOnchange} />
+                                    <div className="exe-file">
+                                        <input type='file' accept={'.exe'} onChange={studentInsertOnchange} />
                                     </div>
-                                    <a href="/files/student-insert-example.csv">Download example</a>
+                                    <a href="/files/student-insert-example.exe">Download example</a>
                                 </div>
                             </div>
                         </div>

@@ -18,6 +18,7 @@ import CRSInfor from './components/pages/CRStudentInfor/CRSInfor';
 import CRProfile from './components/pages/CRProfile/CRProfile';
 import CRViewRequest from './components/pages/CRViewRequest/CRViewRequest';
 import CRViewStudent from './components/pages/CRViewStudent/CRViewStudent';
+import AdminViewCompany from './components/pages/Admin/AdminViewCompany/AdminViewCompany';
 const App: React.FC = () => {
   const user = useSelector((state: any) => state.auth.login.currentUser);
 
@@ -40,6 +41,7 @@ const App: React.FC = () => {
         <Route path='/student/companies' element={<StudentViewCompany />}></Route>
         <Route path='/student/profile' element={<StudentProfile />}></Route>
         <Route path='/cre/manage/students/1' element={<AdminViewStudent />}></Route>
+        <Route path='/cre/companies/1' element={<AdminViewCompany />}></Route>
         <Route path='/cr/students' element={<CRViewStudent />}></Route>
         <Route path='/cr/profile' element={<CRProfile />}></Route>
         <Route path='/cr/requests' element={<CRViewRequest />}></Route>

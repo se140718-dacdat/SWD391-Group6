@@ -4,22 +4,32 @@ import { Company, Field, Report, ResponseData, User } from '../../../model';
 import { companyList, fieldList } from '../../../data';
 import './StudentViewCompany.css';
 import _ from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCompanyList } from '../../../redux/apiRequest';
 const StudentViewCompany: React.FC = () => {
+    const user = useSelector((state: any) => state.auth.login?.currentUser);
     const [majors, setMajors] = useState<Field[]>([]);
-    const [companies, setCompanies] = useState<Company[]>([]);
+    const companies = useSelector((state: any) => state.company.company?.companies);
+    const [companyList, setCompanyList] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company | null>(null);
     const [report, setReport] = useState<Report | null>();
     const [pages, setPages] = useState<number[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
     const [showRecuit, setShowRecuit] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setCompanies(companyList);
+        if (user.roleID != 2) {
+            navigate("/");
+        }
+        if (user?.accessToken) {
+            getCompanyList(dispatch);
+        }
+        { console.log(companies) }
+        setCompanyList(companies);
         setMajors(fieldList);
-        companies.map((company, index) => {
-            pages.push(index++);
-        })
         console.log(pages);
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
@@ -31,7 +41,6 @@ const StudentViewCompany: React.FC = () => {
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = companies.slice(indexOfFirstPost, indexOfLastPost);
     const hideRecuitment = () => {
         setShowRecuit('');
     }
@@ -77,7 +86,7 @@ const StudentViewCompany: React.FC = () => {
                 <div className="company-list">
 
                     {
-                        currentPosts.map(item =>
+                        companyList?.map(item =>
                             <div className="company-item" onClick={() => { showRecuitment(item); }}>
                                 <div className="company-logo">
                                     <img src={item.imageURL} alt="logo-company" />

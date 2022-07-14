@@ -30,6 +30,13 @@ export interface Field {
   fieldID: string;
   fieldName: string;
 }
+
+export interface Recruitment {
+  studentID: string;
+  studentName: string;
+  companyID: String;
+  recruitmentStatus: boolean;
+}
 export interface Company {
   companyID: number;
   companyName: string;

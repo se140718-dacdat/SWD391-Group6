@@ -1,14 +1,29 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { Company, Field } from "../../../model";
 import { companyList } from "../../../data";
 import "./CRProfile.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getCompany } from "../../../redux/apiRequest";
 
 const CRProfile = () => {
+    const user = useSelector((state: any) => state.auth.login?.currentUser);
+    const currentCompany = useSelector((state: any) => state.company.company?.company);
     const [image, setImage] = useState('');
     const [companyField, setCompanyField] = useState<Field[]>([]);
     const [fields, setFields] = useState<Field[]>([]);
-    const [company, setCompany] = useState<Company>(companyList[0]);
+    const [company, setCompany] = useState<Company | null>();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        if (user.roleID != 3) {
+            navigate("/");
+        }
+        getCompany(dispatch, user.username);
+        setCompany(currentCompany)
+        console.log(currentCompany);
+    }, []);
 
     const addNewField = () => {
 
@@ -17,10 +32,12 @@ const CRProfile = () => {
         e.preventDefault();
     }
 
-    const imageOnChange = (e: HTMLInputElement) => {
-    }
     const removeField = (field: Field) => { }
     const fieldOnChange = (oldField: Field, newFieldID: number) => {
+
+    }
+
+    const imageOnChange = (e: HTMLInputElement) => {
 
     }
     return (
@@ -29,7 +46,7 @@ const CRProfile = () => {
                 <form onSubmit={updateCompanySubmit}>
                     <div className="company-profile">
                         <div className="company-logo col-left">
-                            <img src={image} alt="" />
+                            <img src={company?.imageURL} alt="" />
                         </div>
                         <div className="company-profile-info col-right">
                             <div className="block">
