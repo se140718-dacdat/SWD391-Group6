@@ -3,7 +3,7 @@
     position: fixed;
     top: 32px;
     right: 32px;
-    z-index: 1;
+    z-index: 5;
     background-color: #fff;
     display: flex;
     align-items: center;

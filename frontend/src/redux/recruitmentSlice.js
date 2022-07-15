@@ -6,8 +6,10 @@ const recruitmentSlice = createSlice({
         recruitment: {
             recruitments: null,
             isFetching: false,
+            response: null,
+            responseUpdate: null,
             error: false
-        },
+        }
     },
     reducers: {
         getRecruitmentListStart: (state) => {
@@ -22,13 +24,43 @@ const recruitmentSlice = createSlice({
             state.recruitment.isFetching = false;
             state.recruitment.error = true;
         },
+        recruitmentStart: (state) => {
+            state.recruitment.isFetching = true;
+        },
+        recruitmentSuccess: (state, action) => {
+            state.recruitment.isFetching = false;
+            state.recruitment.response = action.payload;
+            state.recruitment.error = false;
+        },
+        recruitmentFailed: (state) => {
+            state.recruitment.isFetching = false;
+            state.recruitment.error = true;
+        },
+        recruitmentUpdateStart: (state) => {
+            state.recruitment.isFetching = true;
+        },
+        recruitmentUpdateSuccess: (state, action) => {
+            state.recruitment.isFetching = false;
+            state.recruitment.responseUpdate = action.payload;
+            state.recruitment.error = false;
+        },
+        recruitmentUpdateFailed: (state) => {
+            state.recruitment.isFetching = false;
+            state.recruitment.error = true;
+        }
     }
 });
 
 export const {
     getRecruitmentListStart,
     getRecruitmentListSuccess,
-    getRecruitmentListFailed
+    getRecruitmentListFailed,
+    recruitmentStart,
+    recruitmentSuccess,
+    recruitmentFailed,
+    recruitmentUpdateStart,
+    recruitmentUpdateSuccess,
+    recruitmentUpdateFailed
 } = recruitmentSlice.actions;
 
 export default recruitmentSlice.reducer;

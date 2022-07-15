@@ -1,14 +1,28 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Student } from "../../../model";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Recruitment, Student } from "../../../model";
 import "./CRViewStudent.css";
-import { studentList } from "../../../data.js";
 import "primeicons/primeicons.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecruitmentList } from "../../../redux/apiRequest";
+
 
 const CRViewStudent = () => {
-  //   console.log(studentList);
-  const [students, setStudent] = useState([studentList]);
-  console.log(students[0][0].fullName);
+  const user = useSelector((state: any) => state.auth.login?.currentUser);
+  const recruitments = useSelector((state: any) => state.recruitment.recruitment?.recruitments);
+  const [requests, setRequests] = useState<Recruitment[]>([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user.roleID != 3) {
+      navigate("/");
+    }
+    if (user?.accessToken) {
+      getRecruitmentList(dispatch, user.username);
+    }
+    { console.log(recruitments) }
+    setRequests(recruitments.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 2));
+  }, []);
   return (
     <div id="CRViewStudent">
       <div id="content">
@@ -42,11 +56,11 @@ const CRViewStudent = () => {
                 <th>Student's Name</th>
                 <th>Other</th>
               </tr>
-              {students[0].map((item, index) => [
+              {requests.map((item, index) => [
                 <tr className="item">
                   <td rowSpan={2}>{index + 1}</td>
                   <td rowSpan={2}>{item.studentID}</td>
-                  <td rowSpan={2}>{item.fullName}</td>
+                  <td rowSpan={2}>{item.studentName}</td>
                   <td>
                     <button className="details-button">Details</button>
                   </td>

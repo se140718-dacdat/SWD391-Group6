@@ -32,6 +32,20 @@ const recruitmentController = {
         } catch (error) {
             res.status(500).send(error);
         }
+    },
+
+    updateRecruitment: async(req, res) => {
+        try {
+            if (req.params.recruitmentStatus == 3) {
+                const recruitment = await Recruitment.findOneAndDelete({ studentID: req.params.studentID });
+                res.status(200).json("Rejected!");
+            } else {
+                const recruitment = await Recruitment.findOneAndUpdate({ studentID: req.params.studentID }, { recruitmentStatus: req.params.recruitmentStatus });
+                res.status(200).json("Accepted!");
+            }
+        } catch (err) {
+            res.status(500).send(error);
+        }
     }
 };
 

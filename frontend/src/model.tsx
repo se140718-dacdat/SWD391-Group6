@@ -37,10 +37,10 @@ export interface Recruitment {
   studentID: string;
   studentName: string;
   companyID: String;
-  recruitmentStatus: boolean;
+  recruitmentStatus: Number;
 }
 export interface Company {
-  companyID: number;
+  companyID: string;
   companyName: string;
   address: string;
   phone: string;
@@ -57,7 +57,7 @@ export interface Company {
 export interface Report {
   studentID: string;
   fullName: string;
-  companyID: number;
+  companyID: string;
   companyName: string;
   cR_ID: number;
 }

@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Field, Recruitment, Student } from '../../../model';
-import { getRecruitmentList } from '../../../redux/apiRequest';
-import { companyList, fieldList } from '../../../data';
+import { getRecruitmentList, updateRecruitment } from '../../../redux/apiRequest';
 import './CRViewRequest.css';
 
 const CRViewRequest = () => {
@@ -11,10 +10,10 @@ const CRViewRequest = () => {
     const recruitments = useSelector((state: any) => state.recruitment.recruitment?.recruitments);
     const [requests, setRequests] = useState<Recruitment[]>([]);
     const [majors, setMajors] = useState<Field[]>([]);
-    const processRequest = (studentID: string, status: number) => { }
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showRecuit, setShowRecuit] = useState('');
+
 
     useEffect(() => {
         if (user.roleID != 3) {
@@ -24,8 +23,7 @@ const CRViewRequest = () => {
             getRecruitmentList(dispatch, user.username);
         }
         { console.log(recruitments) }
-        setRequests(recruitments);
-        setMajors(fieldList);
+        setRequests(recruitments.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 1));
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
             if (e.target == modal) {
@@ -33,6 +31,10 @@ const CRViewRequest = () => {
             }
         }
     }, []);
+    const processRequest = (studentID: string, status: number) => {
+        updateRecruitment(dispatch, studentID, status);
+        setRequests(recruitments.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 1));
+    }
     const hideRecuitment = () => {
         setShowRecuit('');
     }
@@ -57,8 +59,8 @@ const CRViewRequest = () => {
                                 <p className="col2">{item.studentID}</p>
                                 <p className="col3">{item.studentName}</p>
                                 <button className="col4 btn js-btn-detail btn-detail" >detail</button>
-                                <button className="col5 btn js-btn-delete btn-accept" onClick={() => processRequest("SE140718", 1)}>accept</button>
-                                <button className="col6 btn js-btn-delete btn-delete" onClick={() => processRequest("SE140718", 2)}>decline</button>
+                                <button className="col5 btn js-btn-delete btn-accept" onClick={() => processRequest(item.studentID, 2)}>accept</button>
+                                <button className="col6 btn js-btn-delete btn-delete" onClick={() => processRequest(item.studentID, 3)}>decline</button>
                             </div>
                         )
                     }

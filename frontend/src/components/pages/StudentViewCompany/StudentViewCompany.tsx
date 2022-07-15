@@ -1,24 +1,27 @@
 import React, { FormEvent, SetStateAction, useState, Dispatch, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Company, Field, Report, ResponseData, User } from '../../../model';
+import { Company, Field, Recruitment, Report, ResponseData, User } from '../../../model';
 import { companyList, fieldList } from '../../../data';
 import './StudentViewCompany.css';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCompanyList } from '../../../redux/apiRequest';
+import { createRecruitment, getCompanyList } from '../../../redux/apiRequest';
+import MessageBox from '../../modules/popups/MessageBox/MessageBox';
 const StudentViewCompany: React.FC = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
+    const response = useSelector((state: any) => state.recruitment.recruitment?.response);
     const [majors, setMajors] = useState<Field[]>([]);
     const companies = useSelector((state: any) => state.company.company?.companies);
     const [companyList, setCompanyList] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company | null>(null);
-    const [report, setReport] = useState<Report | null>();
     const [pages, setPages] = useState<number[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
     const [showRecuit, setShowRecuit] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [message, setMessage] = useState('');
+
 
     useEffect(() => {
         if (user.roleID != 2) {
@@ -30,7 +33,6 @@ const StudentViewCompany: React.FC = () => {
         { console.log(companies) }
         setCompanyList(companies);
         setMajors(fieldList);
-        console.log(pages);
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
             if (e.target == modal) {
@@ -46,7 +48,22 @@ const StudentViewCompany: React.FC = () => {
     }
 
     const applyToCompany = (company: Company) => {
-
+        const newRecruitment = {
+            studentID: user.username.toUpperCase(),
+            companyID: company.companyID,
+            studentName: user.fullName,
+            recruitmentStatus: 1
+        }
+        createRecruitment(dispatch, newRecruitment);
+        if (response == null && response == "Applying") {
+            setShowRecuit('');
+        } else {
+            setMessage(response);
+            setShowRecuit('');
+            setTimeout(() => {
+                setMessage('');
+            }, 3000);
+        }
     }
 
     const searchSubmit = (e: FormEvent) => {
@@ -56,11 +73,16 @@ const StudentViewCompany: React.FC = () => {
     const showRecuitment = (company: Company) => {
         setShowRecuit('display');
         setCompany(company);
-        setReport(report);
     }
 
     return (
         <div id='StudentViewCompany'>
+            {
+                message != '' ?
+                    <MessageBox message={message} setMessage={setMessage} title={"Information"}></MessageBox>
+                    :
+                    null
+            }
             <div id="content">
                 <form onSubmit={searchSubmit}>
                     <div className="search-bar">
@@ -228,13 +250,7 @@ const StudentViewCompany: React.FC = () => {
                         </div>
                         <div className="btn-interact">
                             {
-                                report == null ?
-                                    <button className="btn btn-apply" onClick={() => applyToCompany((company as Company))}>apply</button>
-                                    :
-                                    report.companyID == company?.companyID ?
-                                        null
-                                        :
-                                        <button className="btn btn-transfer">transfer</button>
+                                <button className="btn btn-apply" onClick={() => applyToCompany((company as Company))}>apply</button>
                             }
                         </div>
                     </div>

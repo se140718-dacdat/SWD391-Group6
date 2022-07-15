@@ -1,9 +1,10 @@
 import axios from "axios";
 import { loginFailed, loginStart, loginSuccess, logoutFailed, logoutStart, logoutSuccess } from "./authSlice";
 import { getCompanyFailed, getCompanyListStart, getCompanyListSuccess, getCompanyStart, getCompanySuccess } from "./companySlice";
-import { getRecruitmentListFailed, getRecruitmentListStart, getRecruitmentListSuccess } from "./recruitmentSlice";
+import { getRecruitmentListFailed, getRecruitmentListStart, getRecruitmentListSuccess, recruitmentFailed, recruitmentStart, recruitmentSuccess, recruitmentUpdateFailed, recruitmentUpdateStart, recruitmentUpdateSuccess } from "./recruitmentSlice";
 import { getStudentFailed, getStudentListStart, getStudentListSuccess, getStudentStart, getStudentSuccess } from "./studentSlice";
 import { getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice";
+import { Recruitment } from "../model";
 
 export const loginUser = async(user, dispatch, navigate) => {
     dispatch(loginStart());
@@ -15,6 +16,26 @@ export const loginUser = async(user, dispatch, navigate) => {
         dispatch(loginFailed());
     }
 };
+
+export const createRecruitment = async(dispatch, recruitment) => {
+    dispatch(recruitmentStart());
+    try {
+        const res = await axios.post("http://localhost:8000/api/recruitment/create-recruitment", recruitment);
+        dispatch(recruitmentSuccess(res.data));
+    } catch (err) {
+        dispatch(recruitmentFailed());
+    }
+}
+
+export const updateRecruitment = async(dispatch, studentID, recruitmentStatus) => {
+    dispatch(recruitmentUpdateStart());
+    try {
+        const res = await axios.post(`http://localhost:8000/api/recruitment/update/${studentID}/${recruitmentStatus}`);
+        dispatch(recruitmentUpdateSuccess(res.data));
+    } catch (err) {
+        dispatch(recruitmentUpdateFailed());
+    }
+}
 
 export const logoutUser = async(dispatch, id, navigate, accessToken) => {
     dispatch(logoutStart());
