@@ -7,11 +7,12 @@ import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecruitment, getCompanyList } from '../../../redux/apiRequest';
 import MessageBox from '../../modules/popups/MessageBox/MessageBox';
+import axios from 'axios';
 const StudentViewCompany: React.FC = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
     const response = useSelector((state: any) => state.recruitment.recruitment?.response);
     const [majors, setMajors] = useState<Field[]>([]);
-    const companies = useSelector((state: any) => state.company.company?.companies);
+    // const companies = useSelector((state: any) => state.company.company?.companies);
     const [companyList, setCompanyList] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company | null>(null);
     const [pages, setPages] = useState<number[]>([]);
@@ -28,10 +29,11 @@ const StudentViewCompany: React.FC = () => {
             navigate("/");
         }
         if (user?.accessToken) {
-            getCompanyList(dispatch);
+            // getCompanyList(dispatch);
+            fetchData();
         }
-        { console.log(companies) }
-        setCompanyList(companies);
+        // { console.log(companies) }
+        // setCompanyList(companies);
         setMajors(fieldList);
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
@@ -41,24 +43,41 @@ const StudentViewCompany: React.FC = () => {
         }
     }, []);
 
+    async function fetchData() {
+        const response = await fetch("http://localhost:8000/api/company/get-all-company");
+        const companies = await response.json();
+        if (companies[0]) {
+            setCompanyList(companies);
+            console.log(companyList);
+        } else {
+            console.log("Empty company list");
+        }
+    }
+
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const hideRecuitment = () => {
         setShowRecuit('');
     }
 
-    const applyToCompany = (company: Company) => {
+    const applyToCompany = async (company: Company) => {
         const newRecruitment = {
             studentID: user.username.toUpperCase(),
             companyID: company.companyID,
             studentName: user.fullName,
             recruitmentStatus: 1
         }
+        // fetch("http://localhost:8000/api/recruitment/create-recruitment", {
+        //     method: "POST",
+        //     body: JSON.stringify(newRecruitment)
+        // }).then(res => {
+        //     res.json()
+        // }).then(json => console.log(json));
+        // console.log(newRecruitment);
         createRecruitment(dispatch, newRecruitment);
         if (response == null && response == "Applying") {
             setShowRecuit('');
         } else {
-            setMessage(response);
             setShowRecuit('');
             setTimeout(() => {
                 setMessage('');
