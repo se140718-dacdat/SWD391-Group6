@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecruitment, getCompanyList } from '../../../redux/apiRequest';
 import MessageBox from '../../modules/popups/MessageBox/MessageBox';
+import axios from 'axios';
 const StudentViewCompany: React.FC = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
     const response = useSelector((state: any) => state.recruitment.recruitment?.response);
@@ -47,18 +48,18 @@ const StudentViewCompany: React.FC = () => {
         setShowRecuit('');
     }
 
-    const applyToCompany = (company: Company) => {
+    const applyToCompany = async(company: Company) => {
         const newRecruitment = {
             studentID: user.username.toUpperCase(),
             companyID: company.companyID,
             studentName: user.fullName,
+            companyName: company.companyName,
             recruitmentStatus: 1
         }
-        createRecruitment(dispatch, newRecruitment);
-        if (response == null && response == "Applying") {
-            setShowRecuit('');
-        } else {
-            setMessage(response);
+        const res = await axios.post("http://localhost:8000/api/recruitment/create-recruitment", newRecruitment);
+        console.log(res);
+        if (typeof res.data === 'string') {
+            setMessage(res.data);
             setShowRecuit('');
             setTimeout(() => {
                 setMessage('');

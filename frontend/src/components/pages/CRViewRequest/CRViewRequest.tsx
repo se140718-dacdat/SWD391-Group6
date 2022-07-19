@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -7,12 +8,9 @@ import './CRViewRequest.css';
 
 const CRViewRequest = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
-    const recruitments = useSelector((state: any) => state.recruitment.recruitment?.recruitments);
     const [requests, setRequests] = useState<Recruitment[]>([]);
-    const [majors, setMajors] = useState<Field[]>([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [showRecuit, setShowRecuit] = useState('');
 
 
     useEffect(() => {
@@ -20,24 +18,21 @@ const CRViewRequest = () => {
             navigate("/");
         }
         if (user?.accessToken) {
-            getRecruitmentList(dispatch, user.username);
-        }
-        { console.log(recruitments) }
-        setRequests(recruitments.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 1));
-        window.onclick = (e: MouseEvent) => {
-            const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
-            if (e.target == modal) {
-                hideRecuitment();
-            }
+            fetchData(user.username);
+            console.log(requests);
         }
     }, []);
     const processRequest = (studentID: string, status: number) => {
         updateRecruitment(dispatch, studentID, status);
-        setRequests(recruitments.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 1));
+        fetchData(user.username);
     }
-    const hideRecuitment = () => {
-        setShowRecuit('');
+
+    const fetchData = async(companyID: String) => {
+        const res = await axios.get(`http://localhost:8000/api/recruitment/${companyID}`);
+        setRequests(res.data.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 1));
+        console.log(requests);
     }
+    
     return (
         <div id='CRViewRequest'>
             <div id="content">
@@ -48,9 +43,6 @@ const CRViewRequest = () => {
                 <div className="content-title">
                     <p style={{ flexGrow: 0.4 }}>roll number</p>
                     <p style={{ flexGrow: 1 }}>student name</p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
                 </div>
                 <div id="student-list">
                     {
@@ -58,7 +50,7 @@ const CRViewRequest = () => {
                             <div className="student-item">
                                 <p className="col2">{item.studentID}</p>
                                 <p className="col3">{item.studentName}</p>
-                                <button className="col4 btn js-btn-detail btn-detail" >detail</button>
+                                <button className="col4 btn js-btn-detail btn-detail" onClick={() => navigate('/cr/student-profile/' + item.studentID)} >detail</button>
                                 <button className="col5 btn js-btn-delete btn-accept" onClick={() => processRequest(item.studentID, 2)}>accept</button>
                                 <button className="col6 btn js-btn-delete btn-delete" onClick={() => processRequest(item.studentID, 3)}>decline</button>
                             </div>

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +7,8 @@ import { getCompanyList } from "../../../../redux/apiRequest";
 import './AdminViewCompany.css';
 const AdminViewCompany = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
-    const companies = useSelector((state: any) => state.company.company?.companies);
     const [majors, setMajors] = useState<Field[]>([]);
-    const [companyList, setCompanyList] = useState<Company[]>([]);
+    const [companies, setCompanies] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company>();
     const [showModal, setShowModal] = useState('');
     const navigate = useNavigate();
@@ -23,10 +23,9 @@ const AdminViewCompany = () => {
             navigate("/");
         }
         if (user?.accessToken) {
-            getCompanyList(dispatch);
+            fetchData();
+            console.log(companies);
         }
-        { console.log(companies) }
-        setCompanyList(companies);
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
             if (e.target == modal) {
@@ -34,6 +33,11 @@ const AdminViewCompany = () => {
             }
         }
     }, []);
+
+    const fetchData = async() => {
+        const res = await axios.get("http://localhost:8000/api/company/get-all-company");
+        setCompanies(res.data);
+    }
 
     const hideModalment = () => {
         setShowModal('');
@@ -68,7 +72,7 @@ const AdminViewCompany = () => {
                 </div>
                 <div id="company-list">
                     {
-                        companyList?.map(item =>
+                        companies?.map(item =>
                             <div className="company-item">
                                 <p className="col2">{item.companyName}</p>
                                 <p className="col3">{item.address}</p>
