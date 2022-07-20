@@ -65,7 +65,7 @@ const AdminViewStudent = () => {
             <div id="content">
                 <div>
                     <form onSubmit={searchSubmit} className="clear">
-                        <input className="search-bar" placeholder="Search student's name" type="text" name='search' />
+                        <input className="search-bar" placeholder="Search student" type="text" name='search' onChange={(e) => {setSearch(e.target.value);}}/>
                         <button className="btn-search" type='submit'>Search</button>
                         <div className="exe">
                             <h3>import form exe</h3>
@@ -104,7 +104,14 @@ const AdminViewStudent = () => {
                     </thead>
                     <tbody>
                         {
-                            students?.map(item =>
+                            students?.filter((student) => {
+                                if(search == '') {
+                                  return student;
+                              } else if(student.studentID.toLocaleLowerCase().includes(search.toLocaleLowerCase()) 
+                              || student.fullName.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+                              || student.email.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+                                  return student;}
+                              } ).map(item =>
                                 <tr className="table-student-info">
                                     <td className="col1">{item.studentID}</td>
                                     <td className="col2">{item.fullName}</td>

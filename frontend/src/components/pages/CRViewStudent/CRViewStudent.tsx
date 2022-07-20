@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { Recruitment, Student } from "../../../model";
+import { useNavigate } from "react-router-dom";
+import { Recruitment } from "../../../model";
 import "./CRViewStudent.css";
 import "primeicons/primeicons.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getRecruitmentList } from "../../../redux/apiRequest";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 
 const CRViewStudent = () => {
   const user = useSelector((state: any) => state.auth.login?.currentUser);
-  // const recruitments = useSelector((state: any) => state.recruitment.recruitment?.recruitments);
   const [requests, setRequests] = useState<Recruitment[]>([]);
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   useEffect(() => {
     if (user.roleID != 3) {
       navigate("/");
@@ -37,6 +35,7 @@ const CRViewStudent = () => {
             type="text"
             className="search-input"
             placeholder="Search student's id"
+            onChange={(e) => {setSearch(e.target.value);}}
           />
           <i className="pi pi-times-circle clear-icon"></i>
           <button className="btn btn-search">
@@ -61,7 +60,13 @@ const CRViewStudent = () => {
                 <th>Student's Name</th>
                 <th>Other</th>
               </tr>
-              {requests.map((item, index) => [
+              {requests?.filter((request) => {
+                if(search == '') {
+                  return request;
+              } else if(request.studentID.toLocaleLowerCase().includes(search.toLocaleLowerCase()) 
+              || request.studentName.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+                  return request;}
+              } ).map((item, index) => [
                 <tr className="item">
                   <td rowSpan={2}>{index + 1}</td>
                   <td rowSpan={2}>{item.studentID}</td>

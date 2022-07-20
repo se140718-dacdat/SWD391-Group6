@@ -40,9 +40,9 @@ const AdminViewReport = () => {
     const getStatus = (recruitmentStatus: Number) => {
         switch (recruitmentStatus) {
             case 3:
-                return ("Registering");
-            case 2:
                 return ("Applied");
+            case 2:
+                return ("Registering");
             default:
                 return ("Not Yet");
         }

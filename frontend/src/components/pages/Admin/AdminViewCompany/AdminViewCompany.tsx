@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Field, Company } from "../../../../model";
-import { getCompanyList } from "../../../../redux/apiRequest";
 import './AdminViewCompany.css';
 const AdminViewCompany = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
     const [majors, setMajors] = useState<Field[]>([]);
+    const [search, setSearch] = useState('');
     const [companies, setCompanies] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company>();
     const [showModal, setShowModal] = useState('');
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
 
     const searchSubmit = () => { }
@@ -49,7 +48,7 @@ const AdminViewCompany = () => {
                     <h3 className="content-heading">company list</h3>
                     <div className="cr-search">
                         <form onSubmit={searchSubmit}>
-                            Search <input className="cr-search-bar" type="text" name="search" placeholder="Company name" required /><i className="fas fa-search vertical-algin"></i>
+                            Search <input className="cr-search-bar" type="text" name="search" placeholder="Company name" onChange={(e) => {setSearch(e.target.value);}}/><i className="fas fa-search vertical-algin"></i>
                         </form>
                     </div>
                 </div>
@@ -72,7 +71,13 @@ const AdminViewCompany = () => {
                 </div>
                 <div id="company-list">
                     {
-                        companies?.map(item =>
+                        companies?.filter((company) => {
+                            if(search == '') {
+                                return company;
+                            } else if(company.companyName.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+                                return company;
+                            }
+                        }).map(item =>
                             <div className="company-item">
                                 <p className="col2">{item.companyName}</p>
                                 <p className="col3">{item.address}</p>

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Field, Recruitment, Student } from '../../../model';
-import { getRecruitmentList, updateRecruitment } from '../../../redux/apiRequest';
 import MessageBox from '../../modules/popups/MessageBox/MessageBox';
 import './CRViewRequest.css';
 
@@ -11,8 +10,8 @@ const CRViewRequest = () => {
   const user = useSelector((state: any) => state.auth.login?.currentUser);
   const [requests, setRequests] = useState<Recruitment[]>([]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [message, setMessage] = useState('');
+  const [search, setSearch] = useState('');
 
 
   useEffect(() => {
@@ -53,7 +52,7 @@ const CRViewRequest = () => {
       <div id="content">
         <h3 className="content-heading">application list</h3>
         <div className="cr-search">
-          <p>Search</p> <input className="cr-search-bar" type="text" name="cr-search" /><i className="fas fa-search vertical-algin"></i>
+          <p>Search</p> <input className="cr-search-bar" type="text" name="cr-search" onChange={(e) => {setSearch(e.target.value);}}/><i className="fas fa-search vertical-algin"></i>
         </div>
         <div className="content-title">
           <p style={{ flexGrow: 0.4 }}>roll number</p>
@@ -61,7 +60,13 @@ const CRViewRequest = () => {
         </div>
         <div id="student-list">
           {
-            requests?.map(item =>
+            requests?.filter((request) => {
+              if(search == '') {
+                return request;
+            } else if(request.studentID.toLocaleLowerCase().includes(search.toLocaleLowerCase()) 
+            || request.studentName.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+                return request;}
+            } ).map(item =>
               <div className="student-item">
                 <p className="col2">{item.studentID}</p>
                 <p className="col3">{item.studentName}</p>

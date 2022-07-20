@@ -28,16 +28,10 @@ const StudentProfile = () => {
 
     const fetchData = async (studentID: String) => {
         const res = await axios.get(`http://localhost:8000/api/student/${studentID}`);
-        await setStudent(res.data);
-        if (student != null) {
-            getOJTStatus(student.studentID);
-        }
-    }
-
-    const getOJTStatus = async (studentID: String) => {
-        const res = await axios.get(`http://localhost:8000/api/recruitment/getOJTStatus/${studentID}`);
-        console.log(res.data);
-        setReport(res.data);
+        setStudent(res.data);
+        const str = user.username.toUpperCase();
+        const rp = await axios.get(`http://localhost:8000/api/recruitment/getOJTStatus/${str}`);
+        setReport(rp.data);
     }
 
     const updateProfileSubmit = (e: FormEvent) => {

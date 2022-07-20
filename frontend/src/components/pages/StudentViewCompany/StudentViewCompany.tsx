@@ -1,39 +1,30 @@
 import React, { FormEvent, SetStateAction, useState, Dispatch, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Company, Field, Recruitment, Report, ResponseData, User } from '../../../model';
-import { companyList, fieldList } from '../../../data';
+import { fieldList } from '../../../data';
 import './StudentViewCompany.css';
-import _ from 'lodash';
+import _, { filter } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { createRecruitment, getCompanyList } from '../../../redux/apiRequest';
 import MessageBox from '../../modules/popups/MessageBox/MessageBox';
 import axios from 'axios';
 const StudentViewCompany: React.FC = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
-    const response = useSelector((state: any) => state.recruitment.recruitment?.response);
     const [majors, setMajors] = useState<Field[]>([]);
-    // const companies = useSelector((state: any) => state.company.company?.companies);
-    const [companyList, setCompanyList] = useState<Company[]>([]);
+    const [companies, setCompanies] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company | null>(null);
     const [pages, setPages] = useState<number[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(5);
     const [showRecuit, setShowRecuit] = useState('');
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const [message, setMessage] = useState('');
+    const [field, setField] = useState('0');
+    const [search, setSearch] = useState('');
+
+
 
 
     useEffect(() => {
-        // if (user.roleID != 2) {
-        //     navigate("/");
-        // }
-        // if (user?.accessToken) {
-        //     // getCompanyList(dispatch);
-        // }
         fetchData();
-        // { console.log(companies) }
-        // setCompanyList(companies);
         setMajors(fieldList);
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
@@ -45,17 +36,10 @@ const StudentViewCompany: React.FC = () => {
 
     async function fetchData() {
         const response = await fetch("http://localhost:8000/api/company/get-all-company");
-        const companies = await response.json();
-        if (companies[0]) {
-            setCompanyList(companies);
-            console.log(companyList);
-        } else {
-            console.log("Empty company list");
-        }
+        const data = await response.json();
+        setCompanies(data);
     }
 
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const hideRecuitment = () => {
         setShowRecuit('');
     }
@@ -81,7 +65,22 @@ const StudentViewCompany: React.FC = () => {
 
     const searchSubmit = (e: FormEvent) => {
         e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
+        // fetchData();
+        // const formData = new FormData(e.target as HTMLFormElement);
+        // const formField = formData.get('field') != null ? formData.get('field') : '0';
+        // const formName = formData.get('search') != null ? formData.get('search') : '';
+        // setField(formField as string);
+        // setSearch(formName as string);
+        // if (field != '0' && search != '') {
+        //     setCompanies(_.filter(companies, {companyName: search}));
+        //     console.log(`${field} and ${search}`)
+        // }
+        // else if (field != '0' && search == '') {
+        //     console.log(`field: ${field}`);
+        // } else if(search != '' && field == '0') {
+        //     setCompanies(_.filter(companies, {companyName: search}));
+        //     console.log(`field: ${search}`);
+        // }
     }
     const showRecuitment = (company: Company) => {
         setShowRecuit('display');
@@ -100,7 +99,7 @@ const StudentViewCompany: React.FC = () => {
                 <form onSubmit={searchSubmit}>
                     <div className="search-bar">
                         <i className="fas fa-search search--bar--icon search-icon"></i>
-                        <input type="text" className="search-input" name='search' placeholder="Search for jobs, companies" />
+                        <input type="text" className="search-input" name='search' onChange={(e) => {setSearch(e.target.value);}} placeholder="Search company name" />
                         <i className="fas fa-times-circle clear-icon" ></i>
                         <button className="btn btn-search"><i className="fas fa-search search-icon"></i> Search</button>
                     </div>
@@ -121,7 +120,16 @@ const StudentViewCompany: React.FC = () => {
                 <div className="company-list">
 
                     {
-                        companyList?.map(item =>
+                        companies?.filter((company) => {
+                            if(search == '') {
+                                return company;
+                            } else if(company.companyName.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+                            company.companyID.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+                                return company;
+                            } else if(field != '0') {
+
+                            }
+                        }).map(item =>
                             <div className="company-item" onClick={() => { showRecuitment(item); }}>
                                 <div className="company-logo">
                                     <img src={item.imageURL} alt="logo-company" />
