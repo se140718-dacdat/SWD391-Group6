@@ -20,9 +20,8 @@ const recruitmentController = {
             const recruitment = await Recruitment.findOne({ studentID: req.params.studentID });
             if (recruitment.companyName != "") {
                 res.status(200).json(recruitment.companyName);
-            } else if (recruitment) {
-                res.status(200).json("Not yet!");
-            } else {
+            }
+            if (!recruitment) {
                 res.status(200).json("Not yet!");
             }
         } catch (error) {

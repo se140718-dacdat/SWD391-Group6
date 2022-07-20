@@ -8,73 +8,72 @@ import MessageBox from '../../modules/popups/MessageBox/MessageBox';
 import './CRViewRequest.css';
 
 const CRViewRequest = () => {
-    const user = useSelector((state: any) => state.auth.login?.currentUser);
-    const [requests, setRequests] = useState<Recruitment[]>([]);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [message, setMessage] = useState('');
+  const user = useSelector((state: any) => state.auth.login?.currentUser);
+  const [requests, setRequests] = useState<Recruitment[]>([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [message, setMessage] = useState('');
 
 
-    useEffect(() => {
-        if (user.roleID != 3) {
-            navigate("/");
-        }
-        if (user?.accessToken) {
-            fetchData(user.username);
-            console.log(requests);
-        }
-    }, []);
-    const processRequest = async (recruitment: Recruitment, status: number) => {
-        const res = await axios.post(`http://localhost:8000/api/recruitment/update/${status}`, recruitment);
-        if (typeof res.data === 'string') {
-            setMessage(res.data);
-            setTimeout(() => {
-                setMessage('');
-            }, 3000);
-        }
-        fetchData(user.username);
-
+  useEffect(() => {
+    if (user.roleID != 3) {
+      navigate("/");
     }
-
-    const fetchData = async (companyID: String) => {
-        const res = await axios.get(`http://localhost:8000/api/recruitment/${companyID}`);
-        setRequests(res.data.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 2));
-        console.log(requests);
+    if (user?.accessToken) {
+      fetchData(user.username);
+      console.log(requests);
     }
+  }, []);
+  const processRequest = async (recruitment: Recruitment, status: number) => {
+    const res = await axios.post(`http://localhost:8000/api/recruitment/update/${status}`, recruitment);
+    if (typeof res.data === 'string') {
+      setMessage(res.data);
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
+    }
+    fetchData(user.username);
 
-    return (
-        <div id='CRViewRequest'>
-            {
-                message != '' ?
-                    <MessageBox message={message} setMessage={setMessage} title={"Information"}></MessageBox>
-                    :
-                    null
-            }
-            <div id="content">
-                <h3 className="content-heading">application list</h3>
-                <div className="cr-search">
-                    <p>Search</p> <input className="cr-search-bar" type="text" name="cr-search" /><i className="fas fa-search vertical-algin"></i>
-                </div>
-                <div className="content-title">
-                    <p style={{ flexGrow: 0.4 }}>roll number</p>
-                    <p style={{ flexGrow: 1 }}>student name</p>
-                </div>
-                <div id="student-list">
-                    {
-                        requests?.map(item =>
-                            <div className="student-item">
-                                <p className="col2">{item.studentID}</p>
-                                <p className="col3">{item.studentName}</p>
-                                <button className="col4 btn js-btn-detail btn-detail" onClick={() => navigate('/cr/student-profile/' + item.studentID)} >detail</button>
-                                <button className="col5 btn js-btn-delete btn-accept" onClick={() => processRequest(item, 3)}>accept</button>
-                                <button className="col6 btn js-btn-delete btn-delete" onClick={() => processRequest(item, 4)}>decline</button>
-                            </div>
-                        )
-                    }
-                </div>
-            </div>
+  }
+
+  const fetchData = async (companyID: String) => {
+    const res = await axios.get(`http://localhost:8000/api/recruitment/${companyID}`);
+    setRequests(res.data.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 2));
+    console.log(requests);
+  }
+
+  return (
+    <div id='CRViewRequest'>
+      {
+        message != '' ?
+          <MessageBox message={message} setMessage={setMessage} title={"Information"}></MessageBox>
+          :
+          null
+      }
+      <div id="content">
+        <h3 className="content-heading">application list</h3>
+        <div className="cr-search">
+          <p>Search</p> <input className="cr-search-bar" type="text" name="cr-search" /><i className="fas fa-search vertical-algin"></i>
         </div>
-    );
-};
-
+        <div className="content-title">
+          <p style={{ flexGrow: 0.4 }}>roll number</p>
+          <p style={{ flexGrow: 1 }}>student name</p>
+        </div>
+        <div id="student-list">
+          {
+            requests?.map(item =>
+              <div className="student-item">
+                <p className="col2">{item.studentID}</p>
+                <p className="col3">{item.studentName}</p>
+                <button className="col4 btn js-btn-detail btn-detail" onClick={() => navigate('/cr/student-profile/' + item.studentID)} >detail</button>
+                <button className="col5 btn js-btn-delete btn-accept" onClick={() => processRequest(item, 3)}>accept</button>
+                <button className="col6 btn js-btn-delete btn-delete" onClick={() => processRequest(item, 4)}>decline</button>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
 export default CRViewRequest;

@@ -28,7 +28,7 @@ const StudentProfile = () => {
 
     const fetchData = async (studentID: String) => {
         const res = await axios.get(`http://localhost:8000/api/student/${studentID}`);
-        setStudent(res.data);
+        await setStudent(res.data);
         if (student != null) {
             getOJTStatus(student.studentID);
         }
@@ -36,6 +36,7 @@ const StudentProfile = () => {
 
     const getOJTStatus = async (studentID: String) => {
         const res = await axios.get(`http://localhost:8000/api/recruitment/getOJTStatus/${studentID}`);
+        console.log(res.data);
         setReport(res.data);
     }
 
