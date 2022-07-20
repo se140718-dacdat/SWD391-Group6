@@ -130,6 +130,7 @@
 #CRViewRequest .btn-accept, 
 #CRViewRequest .btn-delete{
     font-size: 10px;
+    width: 10%;
 }
 #CRViewRequest .btn-detail {
     background-color: #2C5282;
@@ -137,6 +138,7 @@
 
 #CRViewRequest .btn-accept {
     background-color: #62AA7A;
+    max-height: 40px;
 }
 
 #CRViewRequest .btn-delete {
