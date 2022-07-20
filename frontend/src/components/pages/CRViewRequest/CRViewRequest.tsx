@@ -51,12 +51,14 @@ const CRViewRequest = () => {
           <i className="fas fa-search vertical-algin"></i>
         </div>
         <div className="content-title">
+          <p style={{ flexGrow: 0.1 }}>No.</p>
           <p style={{ flexGrow: 0.1 }}>roll number</p>
           <p style={{ flexGrow: 1 }}>student name</p>
         </div>
         <div id="student-list">
-          {requests?.map((item) => (
+          {requests?.map((item, index) => (
             <div className="student-item">
+              <p>{index + 1}</p>
               <p className="">{item.studentID}</p>
               <p className="">{item.studentName}</p>
               <button
