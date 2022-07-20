@@ -136,7 +136,7 @@ export const fieldList: Field[] = [
   },
   {
     fieldID: "IA",
-    fieldName: "Insurance Agency",
+    fieldName: "Information Assurance",
   },
   {
     fieldID: "AI",
@@ -145,6 +145,30 @@ export const fieldList: Field[] = [
   {
     fieldID: "GD",
     fieldName: "Graphic Design",
+  },
+  {
+    fieldID: "BA",
+    fieldName: "Business Administration",
+  },
+  {
+    fieldID: "IB",
+    fieldName: "International Business",
+  },
+  {
+    fieldID: "MC",
+    fieldName: "Multimedia Communication",
+  },
+  {
+    fieldID: "HM",
+    fieldName: "Hotel Management",
+  },
+  {
+    fieldID: "EL",
+    fieldName: "English Language",
+  },
+  {
+    fieldID: "JL",
+    fieldName: "Japanese Language",
   },
 ];
 
