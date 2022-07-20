@@ -5,11 +5,12 @@ import "./CRViewStudent.css";
 import "primeicons/primeicons.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecruitmentList } from "../../../redux/apiRequest";
+import axios from "axios";
 
 
 const CRViewStudent = () => {
   const user = useSelector((state: any) => state.auth.login?.currentUser);
-  const recruitments = useSelector((state: any) => state.recruitment.recruitment?.recruitments);
+  // const recruitments = useSelector((state: any) => state.recruitment.recruitment?.recruitments);
   const [requests, setRequests] = useState<Recruitment[]>([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,11 +19,15 @@ const CRViewStudent = () => {
       navigate("/");
     }
     if (user?.accessToken) {
-      getRecruitmentList(dispatch, user.username);
+      fetchData(user.username);
     }
-    { console.log(recruitments) }
-    setRequests(recruitments.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 2));
   }, []);
+
+  const fetchData = async (companyID: String) => {
+    const res = await axios.get(`http://localhost:8000/api/recruitment/${companyID}`);
+    setRequests(res.data.filter((recruitment: Recruitment) => recruitment.recruitmentStatus === 3));
+    console.log(requests);
+  }
   return (
     <div id="CRViewStudent">
       <div id="content">
@@ -62,7 +67,7 @@ const CRViewStudent = () => {
                   <td rowSpan={2}>{item.studentID}</td>
                   <td rowSpan={2}>{item.studentName}</td>
                   <td>
-                    <button className="details-button">Details</button>
+                    <button className="details-button" onClick={() => navigate('/cr/student-profile/' + item.studentID)} >Details</button>
                   </td>
                 </tr>,
               ])}

@@ -246,6 +246,10 @@
     margin-bottom: 24px;
 }
 
+#StudentProfile .ojt-company span {
+    color: var(--primary-color);
+}
+
 #StudentProfile .grade {
     font-size: 2rem;
     font-weight: bold;

@@ -25,13 +25,13 @@ const StudentViewCompany: React.FC = () => {
 
 
     useEffect(() => {
-        if (user.roleID != 2) {
-            navigate("/");
-        }
-        if (user?.accessToken) {
-            // getCompanyList(dispatch);
-            fetchData();
-        }
+        // if (user.roleID != 2) {
+        //     navigate("/");
+        // }
+        // if (user?.accessToken) {
+        //     // getCompanyList(dispatch);
+        // }
+        fetchData();
         // { console.log(companies) }
         // setCompanyList(companies);
         setMajors(fieldList);
@@ -65,19 +65,13 @@ const StudentViewCompany: React.FC = () => {
             studentID: user.username.toUpperCase(),
             companyID: company.companyID,
             studentName: user.fullName,
-            recruitmentStatus: 1
+            companyName: company.companyName,
+            recruitmentStatus: 2
         }
-        // fetch("http://localhost:8000/api/recruitment/create-recruitment", {
-        //     method: "POST",
-        //     body: JSON.stringify(newRecruitment)
-        // }).then(res => {
-        //     res.json()
-        // }).then(json => console.log(json));
-        // console.log(newRecruitment);
-        createRecruitment(dispatch, newRecruitment);
-        if (response == null && response == "Applying") {
-            setShowRecuit('');
-        } else {
+        const res = await axios.post(`http://localhost:8000/api/recruitment/update/${2}`, newRecruitment);
+        console.log(res);
+        if (typeof res.data === 'string') {
+            setMessage(res.data);
             setShowRecuit('');
             setTimeout(() => {
                 setMessage('');
@@ -269,7 +263,9 @@ const StudentViewCompany: React.FC = () => {
                         </div>
                         <div className="btn-interact">
                             {
-                                <button className="btn btn-apply" onClick={() => applyToCompany((company as Company))}>apply</button>
+                                (user) ?
+                                    <button className="btn btn-apply" onClick={() => applyToCompany((company as Company))}>apply</button> :
+                                    <button className="btn btn-apply" onClick={() => hideRecuitment()}>close</button>
                             }
                         </div>
                     </div>

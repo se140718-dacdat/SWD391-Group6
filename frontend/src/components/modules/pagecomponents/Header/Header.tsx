@@ -4,7 +4,7 @@ import { ResponseData, User } from '../../../../model';
 import { userList } from '../../../../data';
 import { loginUser } from '../../../../redux/apiRequest';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 interface Props {
     setUser: Dispatch<SetStateAction<User | null>>;
 }
@@ -38,7 +38,8 @@ const Header: React.FC<Props> = props => {
             <div>
                 <div id="navbar">
                     <div className="nav-list">
-                        <a className="nav-item"><span>home page</span></a>
+                        <NavLink to={'/'} className="nav-item"><span>home page</span></NavLink>
+                        <NavLink to={'/student/companies'} className="nav-item"><span>career opportunities</span></NavLink>
                         <a onClick={showLogin} className="nav-item session"><span>login</span></a>
                     </div>
                 </div>

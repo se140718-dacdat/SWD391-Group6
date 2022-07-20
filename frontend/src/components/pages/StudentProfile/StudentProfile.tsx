@@ -7,25 +7,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import { navigate } from '@reach/router';
 import { getStudent, getStudentList } from '../../../redux/apiRequest';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const StudentProfile = () => {
     const user = useSelector((state: any) => state.auth.login?.currentUser);
-    const currentStudent = useSelector((state: any) => state.student.student?.student);
     const [student, setStudent] = useState<Student | null>();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [report, setReport] = useState<Report>();
+    const [report, setReport] = useState('');
     const [message, setMessage] = useState('');
 
     useEffect(() => {
         if (user.roleID != 2) {
             navigate("/");
         }
-        getStudent(dispatch, user.username);
-        setStudent(currentStudent)
-        console.log(currentStudent);
+        if (user?.accessToken) {
+            fetchData(user.username);
+        }
     }, []);
+
+    const fetchData = async (studentID: String) => {
+        const res = await axios.get(`http://localhost:8000/api/student/${studentID}`);
+        setStudent(res.data);
+        if (student != null) {
+            getOJTStatus(student.studentID);
+        }
+    }
+
+    const getOJTStatus = async (studentID: String) => {
+        const res = await axios.get(`http://localhost:8000/api/recruitment/getOJTStatus/${studentID}`);
+        setReport(res.data);
+    }
 
     const updateProfileSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -98,14 +110,9 @@ const StudentProfile = () => {
                                     <p className="training-name">{student?.fieldName}</p>
                                 </div>
                             </div>
+                            <div className="work-title">OJT Company</div>
                             <p className="ojt-company">
-                                {
-                                    (() => {
-                                        if (student?.ojtStatus) {
-                                            return [<span>'Are going to OJT at ' </span>, <span>OJT at {report?.companyName}</span>]
-                                        }
-                                    })()
-                                }
+                                <span>{report}</span>
                             </p>
                         </div>
                         <div className="student-about col-right">

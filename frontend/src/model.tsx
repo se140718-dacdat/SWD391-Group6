@@ -37,6 +37,7 @@ export interface Recruitment {
   studentID: string;
   studentName: string;
   companyID: String;
+  companyName: String;
   recruitmentStatus: Number;
 }
 export interface Company {
@@ -59,5 +60,4 @@ export interface Report {
   fullName: string;
   companyID: string;
   companyName: string;
-  cR_ID: number;
 }
