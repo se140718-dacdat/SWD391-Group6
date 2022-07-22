@@ -20,13 +20,12 @@ const AdminViewStudent = () => {
     const [majors, setMajors] = useState<Field[]>([]);
     const [companies, setCompanies] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company>();
-    const [field, setField] = useState<Field[]>([]);
+    const [field, setField] = useState('0');
     const [username, setUsername] = useState('');
     const [showModal, setShowModal] = useState('');
 
 
 
-    const deleteCompany = (companyID: string) => { }
 
 
     useEffect(() => {
@@ -36,7 +35,6 @@ const AdminViewStudent = () => {
         if (user?.accessToken) {
             fetchData();
         }
-        setField(fieldList);
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
             if (e.target == modal) {
@@ -59,6 +57,13 @@ const AdminViewStudent = () => {
     const fetchData = async() => {
         const res = await axios.get("http://localhost:8000/api/student/get-all-student");
         setStudents(res.data);
+        const response = await fetch("http://localhost:8000/api/field/get-fields");
+        const fields = await response.json();
+        setMajors(fields);
+   }
+
+   const handleChange = (e: any) => {
+    setField(e);
    }
     return (
         <div id="CREManageStudent">
@@ -79,10 +84,10 @@ const AdminViewStudent = () => {
                                 </div>
                             </div>
                         </div>
-                        <select className="filter-select" name="field">
+                        <select className="filter-select" name="field" onChange={(e) => {handleChange(e.target.value)}}>
                             <option value='0'>All</option>
                             {
-                                field?.map(item =>
+                                majors?.map(item =>
                                     <option value={item.fieldID}>{item.fieldName}</option>
                                 )
                             }
@@ -111,7 +116,13 @@ const AdminViewStudent = () => {
                               || student.fullName.toLocaleLowerCase().includes(search.toLocaleLowerCase())
                               || student.email.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
                                   return student;}
-                              } ).map(item =>
+                              } ).filter((student) => {
+                                if(field == '0') {
+                                    return student;
+                                } else if(student.major == field) {
+                                    return student;
+                                }
+                              }).map(item =>
                                 <tr className="table-student-info">
                                     <td className="col1">{item.studentID}</td>
                                     <td className="col2">{item.fullName}</td>
@@ -189,7 +200,7 @@ const AdminViewStudent = () => {
                                     <p>Major</p>
                                     <select name="major" value={"Male"} >
                                         {
-                                            field.map(item =>
+                                            majors.map(item =>
                                                 <option value={item.fieldID}>{item.fieldName}</option>
                                             )
                                         }

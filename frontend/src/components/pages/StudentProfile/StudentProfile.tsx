@@ -34,28 +34,30 @@ const StudentProfile = () => {
         setReport(rp.data);
     }
 
-    const updateProfileSubmit = (e: FormEvent) => {
+    const updateProfileSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
-        fetch('/api/student/profile/update',
-            {
-                method: "POST",
-                body: formData
-            }).then(res => {
-                if (res.ok) {
-                    (res.json() as Promise<ResponseData>).then(data => {
-                        if (data.error == 0) {
-                            setMessage('Profile has been updated');
-                        }
-                        else {
-                            setMessage(data.message);
-                        }
-                    });
-                }
-                else {
-                    setMessage('Some thing when wrong, please try again');
-                }
-            })
+        const res = await axios.post(`http://localhost:8000/api/student/update/${user.username}`, formData);
+        console.log(res.data);
+        // fetch('/api/student/profile/update',
+        //     {
+        //         method: "POST",
+        //         body: formData
+        //     }).then(res => {
+        //         if (res.ok) {
+        //             (res.json() as Promise<ResponseData>).then(data => {
+        //                 if (data.error == 0) {
+        //                     setMessage('Profile has been updated');
+        //                 }
+        //                 else {
+        //                     setMessage(data.message);
+        //                 }
+        //             });
+        //         }
+        //         else {
+        //             setMessage('Some thing when wrong, please try again');
+        //         }
+        //     })
     }
     const getDateFormated = (date: string) => {
         const sa = new Date(date).toISOString().substr(0, 10);
@@ -71,7 +73,6 @@ const StudentProfile = () => {
             }
             <div id="content">
                 <form onSubmit={updateProfileSubmit}>
-
                     <div className="student-profile">
                         <div className="student-avt col-left-student">
                             <img src="/images/blankAvt.jpg" alt="student avatar" />

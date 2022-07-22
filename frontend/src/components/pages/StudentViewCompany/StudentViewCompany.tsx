@@ -12,9 +12,6 @@ const StudentViewCompany: React.FC = () => {
     const [majors, setMajors] = useState<Field[]>([]);
     const [companies, setCompanies] = useState<Company[]>([]);
     const [company, setCompany] = useState<Company | null>(null);
-    const [pages, setPages] = useState<number[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(5);
     const [showRecuit, setShowRecuit] = useState('');
     const [message, setMessage] = useState('');
     const [field, setField] = useState('0');
@@ -25,7 +22,6 @@ const StudentViewCompany: React.FC = () => {
 
     useEffect(() => {
         fetchData();
-        setMajors(fieldList);
         window.onclick = (e: MouseEvent) => {
             const modal = document.getElementsByClassName('modal')[0] as HTMLDivElement;
             if (e.target == modal) {
@@ -38,6 +34,9 @@ const StudentViewCompany: React.FC = () => {
         const response = await fetch("http://localhost:8000/api/company/get-all-company");
         const data = await response.json();
         setCompanies(data);
+        const res = await fetch("http://localhost:8000/api/field/get-fields");
+        const fields = await res.json();
+        setMajors(fields);
     }
 
     const hideRecuitment = () => {
@@ -87,6 +86,11 @@ const StudentViewCompany: React.FC = () => {
         setCompany(company);
     }
 
+    const handleChange = (e: any) => {
+        setField(e);
+    }
+
+
     return (
         <div id='StudentViewCompany'>
             {
@@ -99,13 +103,13 @@ const StudentViewCompany: React.FC = () => {
                 <form onSubmit={searchSubmit}>
                     <div className="search-bar">
                         <i className="fas fa-search search--bar--icon search-icon"></i>
-                        <input type="text" className="search-input" name='search' onChange={(e) => {setSearch(e.target.value);}} placeholder="Search company name" />
+                        <input type="text" className="search-input" name='search' onChange={(e) => { setSearch(e.target.value); }} placeholder="Search company name" />
                         <i className="fas fa-times-circle clear-icon" ></i>
                         <button className="btn btn-search"><i className="fas fa-search search-icon"></i> Search</button>
                     </div>
                     <div className="cover">
                         <div className="filter">
-                            <select className="majors filter--item filter--select" name='field'>Majors <i className="fas fa-sort-down"></i>
+                            <select className="majors filter--item filter--select" name='field' onChange={(e) => { handleChange(e.target.value) }}>Majors <i className="fas fa-sort-down"></i>
                                 <option className="majors-item" value={0} defaultChecked>All</option>
                                 {
                                     majors.map(item =>
@@ -121,13 +125,11 @@ const StudentViewCompany: React.FC = () => {
 
                     {
                         companies?.filter((company) => {
-                            if(search == '') {
+                            if (search == '') {
                                 return company;
-                            } else if(company.companyName.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+                            } else if (company.companyName.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
                             company.companyID.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
                                 return company;
-                            } else if(field != '0') {
-
                             }
                         }).map(item =>
                             <div className="company-item" onClick={() => { showRecuitment(item); }}>
@@ -158,15 +160,6 @@ const StudentViewCompany: React.FC = () => {
                     }
 
 
-                </div>
-                <div className="paging">
-                    <button className="paging-btn pre-btn"><i className="fas fa-angle-double-left"></i></button>
-                    {
-                        pages.map(item =>
-                            <NavLink className='page-number' to={'/student/companies?page=' + item}>{currentPage}</NavLink>
-                        )
-                    }
-                    <button className="paging-btn next-btn"><i className="fas fa-angle-double-right"></i></button>
                 </div>
             </div>
 

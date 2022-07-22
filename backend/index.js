@@ -9,6 +9,7 @@ const userRoute = require('./routes/user');
 const studentRoute = require('./routes/student');
 const recruitmentRoute = require('./routes/recruitment')
 const companyRoute = require('./routes/company');
+const fieldRoute = require('./routes/field');
 
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use("/api/user", userRoute);
 app.use("/api/student", studentRoute);
 app.use("/api/recruitment", recruitmentRoute);
 app.use("/api/company", companyRoute);
+app.use("/api/field", fieldRoute);
 
 app.listen(8000, () => {
     console.log("Server is running");
